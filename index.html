@@ -254,6 +254,14 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
   display:block;margin-bottom:8px}
 .cotiz__total strong{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.1rem);color:var(--cal);
   letter-spacing:-.03em;display:block;line-height:1.1}
+.cotiz__incluye{margin:22px 0 6px}
+.cotiz__rot{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;
+  color:var(--cobre);margin:18px 0 10px}
+.cotiz__rot:first-child{margin-top:0}
+.cotiz__incluye ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.cotiz__incluye li{position:relative;padding-left:20px;font-size:.93rem;line-height:1.45}
+.cotiz__incluye li::before{content:"";position:absolute;left:0;top:.52em;width:7px;height:7px;
+  background:var(--cobre);border-radius:1px}
 .cotiz__nota{font-size:.79rem;color:rgba(255,255,255,.4);margin:14px 0 26px;line-height:1.5}
 .cotiz__res .btn{width:100%;margin-top:auto}
 @media(max-width:900px){.cotiz{grid-template-columns:1fr}.cotiz__form,.cotiz__res{padding:32px 24px}}
@@ -785,11 +793,13 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
         <div class="linea-dato"><span>Terminación</span><b id="rNiv">Estándar</b></div>
         <div class="linea-dato"><span>Plazo estimado</span><b id="rPlazo">3 semanas</b></div>
 
-        <div class="cotiz__total" id="bloqueTotal">
-          <span>RANGO ORIENTATIVO</span>
-          <strong id="rTotal">—</strong>
+        <div class="cotiz__incluye">
+          <span class="cotiz__rot">QUÉ INCLUYE</span>
+          <ul id="rAlcance"></ul>
+          <span class="cotiz__rot">CÓMO QUEDA</span>
+          <ul id="rTerminacion"></ul>
         </div>
-        <p class="cotiz__nota">Estimación calculada con valores de referencia por m². No sustituye al presupuesto: el precio final surge de la visita y del estado real de las instalaciones.</p>
+        <p class="cotiz__nota">El precio depende del estado real de las instalaciones, así que te lo pasamos después de la visita, con el detalle por rubro. La visita no tiene costo.</p>
 
         <a class="btn btn--cobre" id="rWhats" target="_blank" rel="noopener" href="https://wa.me/59897164582">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
@@ -983,18 +993,73 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
    ===================================================================== */
 const TEL = '59897164582';
 
-/* Poné MOSTRAR_PRECIOS = false si alguna vez querés ocultar el rango
-   y que la calculadora devuelva solo el plazo estimado. */
-const MOSTRAR_PRECIOS = true;
-/* Moneda del rango. 'UYU' muestra "$ 80.000"; 'USD' muestra "USD 2.000".
-   Cambiando esta constante cambia toda la calculadora. */
-const MONEDA = 'UYU';
-/* Valor de referencia por m² EN PESOS, terminación estándar. Calibrado
-   sobre el precio real de un baño completo (~$ 80.000). Ajustá estos
-   números cuando cambien tus costos: es lo único que hay que tocar. */
-const PRECIO_M2  = { cocina:11500, bano:13500, living:6500, dorm:6000, local:7800, casa:9000 };
+/* ALCANCE: el trabajo que se hace siempre en ese ambiente.
+   TERMINACION: cómo queda según el nivel elegido — es lo que el cliente
+   se imagina. Editá estos textos cuando cambie tu forma de trabajar.
+   Acá NO hay precios a propósito: el precio lo pasa Jean tras la visita. */
 const SEMANAS_M2 = { cocina:.25, bano:.35, living:.14, dorm:.14, local:.16, casa:.10 };
-const NIVEL = { estandar:{f:1,txt:'Estándar'}, superior:{f:1.3,txt:'Superior'}, premium:{f:1.65,txt:'Premium'} };
+const NIVEL = { estandar:{txt:'Estándar',f:1}, superior:{txt:'Superior',f:1.1}, premium:{txt:'Premium',f:1.25} };
+
+const ALCANCE = {
+  cocina:['Retiro del mueble y revestimiento viejo','Puntos de agua y desagüe nuevos',
+          'Tomas y luz sobre mesada','Mueble bajo y alto a medida','Artefactos instalados y probados'],
+  bano:  ['Retiro de artefactos y revestimiento','Cañería y desagüe nuevos',
+          'Impermeabilización de piso y muro','Colocación de porcelanato','Sanitarios y grifería instalados'],
+  living:['Reparación de paredes y cielorraso','Tratamiento de humedad si aparece',
+          'Enduido, lijado y pintura','Revisión de bocas y llaves','Zócalos y terminaciones'],
+  dorm:  ['Reparación de paredes y cielorraso','Enduido, lijado y pintura',
+          'Placard a medida si lo pedís','Tomas y luz de cabecera','Zócalos y terminaciones'],
+  local: ['Distribución del salón según el uso','Instalación eléctrica dimensionada',
+          'Piso comercial de alto tránsito','Iluminación de vidriera y salón','Terminaciones y cartelería base'],
+  casa:  ['Dirección de obra de principio a fin','Instalación sanitaria y eléctrica nuevas',
+          'Movimiento de tabiques según proyecto','Pisos, revestimientos y cielorrasos','Aberturas, pintura y entrega limpia']
+};
+
+const TERMINACION = {
+  cocina:{
+    estandar:['Melamina en muebles, herrajes con cierre común','Mesada de granito nacional',
+              'Revestimiento cerámico sobre mesada','Luz general en cielorraso'],
+    superior:['Melamina texturada, herrajes con cierre suave','Mesada de cuarzo o compacto',
+              'Porcelanato hasta la alacena','Luz LED bajo alacena'],
+    premium: ['Frentes laqueados o enchapados, herrajes premium','Mesada de cuarzo con bacha bajo mesada',
+              'Placa gran formato sin juntas a la vista','Luz de acento y perfilería LED integrada']},
+  bano:{
+    estandar:['Porcelanato 30×60 en piso y muro','Sanitarios de línea, grifería monocomando',
+              'Mampara de vidrio templado','Espejo y luz de techo'],
+    superior:['Porcelanato 60×60, venecitas de acento','Inodoro con mochila embutida',
+              'Mampara sin perfil a la vista','Mueble bajo bacha y luz sobre espejo'],
+    premium: ['Placa gran formato símil mármol, piso a muro','Grifería empotrada y ducha lluvia',
+              'Mampara a medida de piso a techo','Nicho iluminado y luz indirecta perimetral']},
+  living:{
+    estandar:['Paredes lisas y parejas, pintura lavable','Cielorraso reparado y pintado',
+              'Zócalo de madera pintado','Luz central y apliques'],
+    superior:['Cielorraso de yeso con gargantas de luz','Pared de acento con textura o revestimiento',
+              'Zócalo alto y molduras','Luz indirecta y dimerizada'],
+    premium: ['Revestimiento de piedra o listones de madera','Jardín vertical o panel 3D iluminado',
+              'Cielorraso escalonado con luz oculta','Escenas de luz por control']},
+  dorm:{
+    estandar:['Paredes y cielorraso parejos, pintura lavable','Placard de melamina con barral y estantes',
+              'Zócalo de madera pintado','Luz central y veladores'],
+    superior:['Pared de cabecera con textura o empapelado','Placard con cajonera y herrajes suaves',
+              'Cielorraso con garganta de luz','Apliques de lectura a cada lado'],
+    premium: ['Cabecera revestida en madera o tapizada','Vestidor abierto a medida con iluminación interior',
+              'Cielorraso con luz perimetral oculta','Control de luz y cortinas desde la cama']},
+  local:{
+    estandar:['Piso porcelanato de alto tránsito','Paredes lisas y pintura lavable',
+              'Iluminación general en riel','Mostrador simple'],
+    superior:['Revestimiento de acento en zona de marca','Cielorraso con luz de vidriera',
+              'Mostrador a medida iluminado','Instalación pensada para equipos'],
+    premium: ['Diseño de local completo con identidad de marca','Panel 3D o piedra en pared principal',
+              'Iluminación escenográfica por sectores','Mobiliario y cartelería a medida']},
+  casa:{
+    estandar:['Terminaciones parejas en toda la vivienda','Porcelanato en áreas húmedas',
+              'Pintura lavable y cielorrasos reparados','Instalaciones nuevas a norma'],
+    superior:['Cielorrasos de yeso con luz integrada','Cocina y baños con terminación superior',
+              'Placares a medida en dormitorios','Luz proyectada ambiente por ambiente'],
+    premium: ['Proyecto integral con detalle constructivo','Revestimientos de gran formato y madera',
+              'Iluminación de acento en toda la casa','Carpintería a medida en cada ambiente']}
+};
+
 const NOMBRE_AMB = { cocina:'Cocina', bano:'Baño', living:'Living / comedor', dorm:'Dormitorio', local:'Local comercial', casa:'Vivienda completa' };
 
 /* Obras realizadas. Cada una lleva su foto en fotos/.
@@ -1087,15 +1152,11 @@ tabs.forEach((t,i)=>{
 
 /* cotizador */
 const m2 = $('#m2');
-const paso = MONEDA === 'UYU' ? 1000 : 100;
-const fmt = n => new Intl.NumberFormat('es-UY').format(Math.round(n/paso)*paso);
 function calcular(){
   const amb = document.querySelector('input[name="amb"]:checked').value;
   const niv = document.querySelector('input[name="niv"]:checked').value;
   const sup = +m2.value;
-  const base = PRECIO_M2[amb] * sup * NIVEL[niv].f;
-  const factorNiv = niv==='premium' ? 1.25 : niv==='superior' ? 1.1 : 1;
-  const semanas = Math.max(1, Math.round(SEMANAS_M2[amb] * sup * factorNiv));
+  const semanas = Math.max(1, Math.round(SEMANAS_M2[amb] * sup * NIVEL[niv].f));
 
   $('#m2Val').textContent = sup + ' m²';
   $('#rAmb').textContent  = NOMBRE_AMB[amb];
@@ -1103,20 +1164,15 @@ function calcular(){
   $('#rNiv').textContent  = NIVEL[niv].txt;
   $('#rPlazo').textContent = semanas + (semanas===1 ? ' semana' : ' semanas');
 
-  let linea = '';
-  if(MOSTRAR_PRECIOS){
-    const r = MONEDA === 'UYU'
-      ? '$ ' + fmt(base*0.88) + ' – $ ' + fmt(base*1.12)
-      : 'USD ' + fmt(base*0.88) + ' – ' + fmt(base*1.12);
-    $('#rTotal').textContent = r;
-    linea = '\nRango estimado en la web: ' + r;
-  } else {
-    $('#bloqueTotal').style.display = 'none';
-  }
+  const li = arr => arr.map(t => '<li>' + t + '</li>').join('');
+  $('#rAlcance').innerHTML     = li(ALCANCE[amb]);
+  $('#rTerminacion').innerHTML = li(TERMINACION[amb][niv]);
 
   const msj = 'Hola, quiero un presupuesto.\n\nAmbiente: ' + NOMBRE_AMB[amb] +
               '\nSuperficie: ' + sup + ' m²\nTerminación: ' + NIVEL[niv].txt +
-              '\nPlazo estimado: ' + semanas + ' semanas' + linea;
+              '\nPlazo estimado: ' + semanas + ' semanas' +
+              '\n\nTerminación que elegí en la web:\n· ' +
+              TERMINACION[amb][niv].join('\n· ');
   $('#rWhats').href = 'https://wa.me/' + TEL + '?text=' + encodeURIComponent(msj);
 }
 $$('#ambientes input, #niveles input').forEach(i=>i.addEventListener('change', calcular));
