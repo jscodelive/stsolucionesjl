@@ -254,6 +254,19 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
   display:block;margin-bottom:8px}
 .cotiz__total strong{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.1rem);color:var(--cal);
   letter-spacing:-.03em;display:block;line-height:1.1}
+.extras{display:grid;gap:9px;margin-top:4px}
+.extras label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;
+  font-size:.93rem;line-height:1.4;padding:9px 12px;border:1px solid var(--linea);
+  border-radius:2px;transition:border-color .18s var(--ease),background .18s var(--ease)}
+.extras label:hover{border-color:var(--cobre)}
+.extras input{appearance:none;flex:none;width:17px;height:17px;margin-top:1px;
+  border:1px solid var(--grafito);border-radius:2px;display:grid;place-items:center;
+  transition:background .18s var(--ease),border-color .18s var(--ease)}
+.extras input:checked{background:var(--cobre);border-color:var(--cobre)}
+.extras input:checked::after{content:"";width:9px;height:5px;border-left:2px solid #1B1310;
+  border-bottom:2px solid #1B1310;transform:rotate(-45deg) translate(1px,-1px)}
+.extras input:checked + span{font-weight:600}
+.extras label:has(input:checked){border-color:var(--cobre);background:rgba(197,131,97,.06)}
 .cotiz__incluye{margin:22px 0 6px}
 .cotiz__rot{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;
   color:var(--cobre);margin:18px 0 10px}
@@ -745,8 +758,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
   <div class="wrap">
     <div class="bloque__cab rev">
       <p class="eyebrow eyebrow--cl">Cotizador</p>
-      <h2>Una idea del orden de inversión, en 30 segundos.</h2>
-      <p>Elegí qué querés reformar, cuántos metros tiene y qué nivel de terminación buscás. Te damos un rango orientativo y armamos el mensaje para que nos lo mandes por WhatsApp.</p>
+      <h2>Armá tu reforma en 30 segundos.</h2>
+      <p>Elegí qué querés reformar, cuánto mide, con qué terminación te lo imaginás y qué más necesitás. Te mostramos cómo queda y armamos el mensaje para que nos lo mandes por WhatsApp.</p>
     </div>
 
     <div class="cotiz rev">
@@ -773,7 +786,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
           <p class="rango-val"><span>4 m²</span><b id="m2Val">6 m²</b><span>180 m²</span></p>
         </div>
 
-        <div class="campo" style="margin-bottom:0">
+        <div class="campo">
           <p class="paso-lbl">PASO 03</p>
           <fieldset>
             <legend>Nivel de terminación</legend>
@@ -784,10 +797,18 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
             </div>
           </fieldset>
         </div>
+
+        <div class="campo" style="margin-bottom:0">
+          <p class="paso-lbl">PASO 04 · OPCIONAL</p>
+          <fieldset>
+            <legend>¿Algo de esto entra en el trabajo?</legend>
+            <div class="extras" id="extras"></div>
+          </fieldset>
+        </div>
       </div>
 
       <div class="cotiz__res">
-        <h3>Tu estimación</h3>
+        <h3>Tu reforma</h3>
         <div class="linea-dato"><span>Ambiente</span><b id="rAmb">Cocina</b></div>
         <div class="linea-dato"><span>Superficie</span><b id="rM2">6 m²</b></div>
         <div class="linea-dato"><span>Terminación</span><b id="rNiv">Estándar</b></div>
@@ -1015,6 +1036,28 @@ const ALCANCE = {
           'Movimiento de tabiques según proyecto','Pisos, revestimientos y cielorrasos','Aberturas, pintura y entrega limpia']
 };
 
+/* EXTRAS: lo que el cliente puede marcar en el paso 04. Son las preguntas
+   que igual habría que hacerle por WhatsApp, hechas antes de escribir.
+   Cada marca viaja en el mensaje, así el presupuesto sale con menos idas
+   y vueltas. Agregá o sacá ítems libremente. */
+const EXTRAS = {
+  cocina:['Cambiar la ubicación de la pileta o la cocina','Abrir la cocina al living',
+          'Mesada nueva','Campana y horno empotrados','Isla o península',
+          'Cambiar el piso','Instalación de gas'],
+  bano:  ['Cambiar bañera por ducha','Mampara nueva','Cambiar todos los sanitarios',
+          'Mueble bajo bacha','Nicho para shampoo','Ventilación forzada',
+          'Calefón o calentador nuevo'],
+  living:['Tratar humedad o filtración','Cielorraso nuevo','Pared de acento revestida',
+          'Cambiar el piso','Luz indirecta en cielorraso','Sacar o abrir un tabique'],
+  dorm:  ['Placard a medida','Vestidor','Tratar humedad o filtración',
+          'Cielorraso nuevo','Cambiar el piso','Luz de lectura a los lados de la cama'],
+  local: ['Habilitación municipal o bomberos','Vidriera o frente nuevo','Mostrador a medida',
+          'Baño para público','Aire acondicionado','Cartelería iluminada'],
+  casa:  ['Mover tabiques o cambiar la distribución','Instalación eléctrica completa nueva',
+          'Instalación sanitaria completa nueva','Cocina incluida','Baños incluidos',
+          'Techo o impermeabilización','Aberturas nuevas','Vivir en la casa durante la obra']
+};
+
 const TERMINACION = {
   cocina:{
     estandar:['Melamina en muebles, herrajes con cierre común','Mesada de granito nacional',
@@ -1152,6 +1195,7 @@ tabs.forEach((t,i)=>{
 
 /* cotizador */
 const m2 = $('#m2');
+let ambRenderizado = null;
 function calcular(){
   const amb = document.querySelector('input[name="amb"]:checked').value;
   const niv = document.querySelector('input[name="niv"]:checked').value;
@@ -1164,18 +1208,30 @@ function calcular(){
   $('#rNiv').textContent  = NIVEL[niv].txt;
   $('#rPlazo').textContent = semanas + (semanas===1 ? ' semana' : ' semanas');
 
+  /* Los extras se redibujan SOLO al cambiar de ambiente: si se redibujaran
+     en cada cálculo, al marcar una casilla se destruiría el elemento recién
+     clicado y se perdería el foco del teclado. */
+  if(ambRenderizado !== amb){
+    ambRenderizado = amb;
+    $('#extras').innerHTML = EXTRAS[amb].map(t =>
+      '<label><input type="checkbox" value="' + t + '"><span>' + t + '</span></label>').join('');
+  }
+
   const li = arr => arr.map(t => '<li>' + t + '</li>').join('');
   $('#rAlcance').innerHTML     = li(ALCANCE[amb]);
   $('#rTerminacion').innerHTML = li(TERMINACION[amb][niv]);
 
+  const elegidos = $$('#extras input:checked').map(i => i.value);
   const msj = 'Hola, quiero un presupuesto.\n\nAmbiente: ' + NOMBRE_AMB[amb] +
               '\nSuperficie: ' + sup + ' m²\nTerminación: ' + NIVEL[niv].txt +
               '\nPlazo estimado: ' + semanas + ' semanas' +
               '\n\nTerminación que elegí en la web:\n· ' +
-              TERMINACION[amb][niv].join('\n· ');
+              TERMINACION[amb][niv].join('\n· ') +
+              (elegidos.length ? '\n\nAdemás necesito:\n· ' + elegidos.join('\n· ') : '');
   $('#rWhats').href = 'https://wa.me/' + TEL + '?text=' + encodeURIComponent(msj);
 }
 $$('#ambientes input, #niveles input').forEach(i=>i.addEventListener('change', calcular));
+$('#extras').addEventListener('change', calcular);
 m2.addEventListener('input', calcular);
 calcular();
 
