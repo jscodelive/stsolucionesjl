@@ -1,0 +1,26 @@
+# Sitio estático de una sola página: no hay build, se publica la raíz tal cual.
+[build]
+  publish = "."
+  command = ""
+
+# Cabeceras de seguridad y de caché.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# El HTML nunca se cachea: al hacer push, el cambio se ve al instante.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Cualquier ruta que no exista sirve la portada (evita 404 al compartir enlaces
+# con anclas viejas o mal escritas).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
