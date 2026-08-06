@@ -761,8 +761,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
         <div class="campo">
           <p class="paso-lbl">PASO 02</p>
           <label for="m2">¿Cuántos metros cuadrados tiene?</label>
-          <input class="rango" id="m2" type="range" min="4" max="180" step="1" value="12">
-          <p class="rango-val"><span>4 m²</span><b id="m2Val">12 m²</b><span>180 m²</span></p>
+          <input class="rango" id="m2" type="range" min="4" max="180" step="1" value="6">
+          <p class="rango-val"><span>4 m²</span><b id="m2Val">6 m²</b><span>180 m²</span></p>
         </div>
 
         <div class="campo" style="margin-bottom:0">
@@ -781,7 +781,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
       <div class="cotiz__res">
         <h3>Tu estimación</h3>
         <div class="linea-dato"><span>Ambiente</span><b id="rAmb">Cocina</b></div>
-        <div class="linea-dato"><span>Superficie</span><b id="rM2">12 m²</b></div>
+        <div class="linea-dato"><span>Superficie</span><b id="rM2">6 m²</b></div>
         <div class="linea-dato"><span>Terminación</span><b id="rNiv">Estándar</b></div>
         <div class="linea-dato"><span>Plazo estimado</span><b id="rPlazo">3 semanas</b></div>
 
@@ -983,12 +983,18 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
    ===================================================================== */
 const TEL = '59897164582';
 
-/* Valores de referencia por m² en USD. SON PLACEHOLDERS: reemplazalos por
-   tus costos reales, o poné MOSTRAR_PRECIOS = false para ocultar el rango. */
+/* Poné MOSTRAR_PRECIOS = false si alguna vez querés ocultar el rango
+   y que la calculadora devuelva solo el plazo estimado. */
 const MOSTRAR_PRECIOS = true;
-const PRECIO_M2  = { cocina:380, bano:450, living:220, dorm:200, local:260, casa:300 };
+/* Moneda del rango. 'UYU' muestra "$ 80.000"; 'USD' muestra "USD 2.000".
+   Cambiando esta constante cambia toda la calculadora. */
+const MONEDA = 'UYU';
+/* Valor de referencia por m² EN PESOS, terminación estándar. Calibrado
+   sobre el precio real de un baño completo (~$ 80.000). Ajustá estos
+   números cuando cambien tus costos: es lo único que hay que tocar. */
+const PRECIO_M2  = { cocina:11500, bano:13500, living:6500, dorm:6000, local:7800, casa:9000 };
 const SEMANAS_M2 = { cocina:.25, bano:.35, living:.14, dorm:.14, local:.16, casa:.10 };
-const NIVEL = { estandar:{f:1,txt:'Estándar'}, superior:{f:1.35,txt:'Superior'}, premium:{f:1.8,txt:'Premium'} };
+const NIVEL = { estandar:{f:1,txt:'Estándar'}, superior:{f:1.3,txt:'Superior'}, premium:{f:1.65,txt:'Premium'} };
 const NOMBRE_AMB = { cocina:'Cocina', bano:'Baño', living:'Living / comedor', dorm:'Dormitorio', local:'Local comercial', casa:'Vivienda completa' };
 
 /* Obras realizadas. Cada una lleva su foto en fotos/.
@@ -1081,7 +1087,8 @@ tabs.forEach((t,i)=>{
 
 /* cotizador */
 const m2 = $('#m2');
-const fmt = n => new Intl.NumberFormat('es-UY').format(Math.round(n/100)*100);
+const paso = MONEDA === 'UYU' ? 1000 : 100;
+const fmt = n => new Intl.NumberFormat('es-UY').format(Math.round(n/paso)*paso);
 function calcular(){
   const amb = document.querySelector('input[name="amb"]:checked').value;
   const niv = document.querySelector('input[name="niv"]:checked').value;
@@ -1098,7 +1105,9 @@ function calcular(){
 
   let linea = '';
   if(MOSTRAR_PRECIOS){
-    const r = 'USD ' + fmt(base*0.88) + ' – ' + fmt(base*1.12);
+    const r = MONEDA === 'UYU'
+      ? '$ ' + fmt(base*0.88) + ' – $ ' + fmt(base*1.12)
+      : 'USD ' + fmt(base*0.88) + ' – ' + fmt(base*1.12);
     $('#rTotal').textContent = r;
     linea = '\nRango estimado en la web: ' + r;
   } else {
