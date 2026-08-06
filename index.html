@@ -3,572 +3,951 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ST Soluciones Integrales | Remodelaciones y reformas en Montevideo</title>
-<meta name="description" content="Reformas integrales, cocinas, baños, pintura, iluminación y carpintería en Montevideo. Presupuesto sin costo y fecha de entrega por escrito.">
+<title>ST Soluciones Integrales | Reformas y remodelaciones en Montevideo</title>
+<meta name="description" content="Reformas integrales, cocinas, baños, pintura, iluminación y carpintería en Montevideo y Canelones. Presupuesto cerrado, fecha de entrega por escrito y un solo responsable de obra.">
 <meta name="theme-color" content="#22262B">
 <meta property="og:title" content="ST Soluciones Integrales | Remodelamos tu mundo">
-<meta property="og:description" content="Reformas integrales en Montevideo. Presupuesto sin costo y fecha de entrega por escrito.">
+<meta property="og:description" content="Reformas integrales en Montevideo. Presupuesto cerrado y fecha de entrega por escrito.">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="es_UY">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   ST SOLUCIONES INTEGRALES
+   Concepto: del plano a la obra terminada.
+   Grafito = proyecto · Yeso = obra entregada · Cobre = marca
+   ============================================================ */
 :root{
-  /* Paleta de materiales de obra */
-  --hormigon:#22262B;      /* graf ito frio, base del plano */
-  --hormigon-2:#2C3137;
-  --grafito:#5A626B;
-  --yeso:#EFEDE7;          /* muro terminado */
-  --yeso-2:#E4E1D9;
-  --cal:#FFFFFF;
-  --cobre:#C58361;         /* acento de marca */
-  --cobre-osc:#9C6242;
-  --linea:rgba(34,38,43,.14);
-
+  --hormigon:#22262B; --hormigon-2:#2A2F35; --hormigon-3:#191C20;
+  --grafito:#5A626B; --grafito-cl:#8A9199;
+  --yeso:#EFEDE7; --cal:#FFFFFF;
+  --cobre:#C58361; --cobre-osc:#96603F;
+  --linea:rgba(34,38,43,.13); --linea-cl:rgba(255,255,255,.12);
   --display:'Archivo','Helvetica Neue',Arial,sans-serif;
   --texto:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
   --mono:'Azeret Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --r:3px; --ease:cubic-bezier(.22,.61,.36,1);
 }
-
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--yeso);color:var(--hormigon);
-  font-family:var(--texto);font-size:17px;line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{margin:0;background:var(--yeso);color:var(--hormigon);font-family:var(--texto);
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 a{color:inherit}
-.wrap{width:min(1120px,90vw);margin-inline:auto}
+.wrap{width:min(1180px,90vw);margin-inline:auto}
+.oculto{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-spacing:-.025em;margin:0}
+.eyebrow{font-family:var(--mono);font-size:.69rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cobre-osc);margin:0 0 18px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:24px;height:1px;background:currentColor;flex:none}
+.eyebrow--cl{color:var(--cobre)}
 
-/* ---------- tipografía ---------- */
-h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:0}
-.eyebrow{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--cobre-osc);margin:0 0 18px;display:flex;align-items:center;gap:10px;
-}
-.eyebrow::before{content:"";width:26px;height:1px;background:currentColor;flex:none}
-.eyebrow--claro{color:var(--cobre)}
-
-/* ---------- botones ---------- */
-.btn{
-  display:inline-flex;align-items:center;gap:12px;
-  font-family:var(--display);font-weight:700;font-size:1.02rem;letter-spacing:-.01em;
-  padding:16px 26px;border-radius:2px;text-decoration:none;border:1px solid transparent;
-  transition:background .18s ease,color .18s ease,transform .18s ease;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:-.01em;
+  padding:16px 26px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;
+  transition:background .2s var(--ease),color .2s var(--ease),transform .2s var(--ease),border-color .2s var(--ease)}
 .btn svg{flex:none}
 .btn--cobre{background:var(--cobre);color:#1B1310}
 .btn--cobre:hover{background:var(--cal);transform:translateY(-2px)}
-.btn--linea{border-color:rgba(255,255,255,.28);color:var(--cal)}
+.btn--linea{border-color:rgba(255,255,255,.26);color:var(--cal)}
 .btn--linea:hover{border-color:var(--cobre);color:var(--cobre)}
-.btn--oscuro{background:var(--hormigon);color:var(--yeso)}
-.btn--oscuro:hover{background:var(--cobre);color:#1B1310;transform:translateY(-2px)}
-a:focus-visible,summary:focus-visible,button:focus-visible{
-  outline:2px solid var(--cobre);outline-offset:3px;border-radius:2px;
-}
+.btn--osc{background:var(--hormigon);color:var(--yeso)}
+.btn--osc:hover{background:var(--cobre);color:#1B1310;transform:translateY(-2px)}
+.btn--min{padding:12px 20px;font-size:.9rem}
+:focus-visible{outline:2px solid var(--cobre);outline-offset:3px;border-radius:2px}
 
-/* ---------- header ---------- */
-.top{
-  position:sticky;top:0;z-index:40;background:rgba(34,38,43,.92);
-  backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.09);
-}
-.top__in{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+/* preloader */
+#carga{position:fixed;inset:0;z-index:100;background:var(--hormigon);display:grid;place-items:center;
+  transition:opacity .5s var(--ease),visibility .5s}
+#carga.listo{opacity:0;visibility:hidden}
+.carga__sello{width:64px;height:64px;margin:auto;display:grid;place-items:center;border:1px solid var(--cobre);
+  color:var(--cobre);font-family:var(--display);font-weight:800;font-size:1.3rem}
+.carga__barra{width:120px;height:1px;background:rgba(255,255,255,.15);margin:22px auto 0;overflow:hidden}
+.carga__barra i{display:block;height:100%;width:0;background:var(--cobre);animation:cargar 1s var(--ease) forwards}
+@keyframes cargar{to{width:100%}}
+
+/* header */
+.top{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(34,38,43,.5);
+  backdrop-filter:blur(14px);border-bottom:1px solid transparent;
+  transition:background .3s var(--ease),border-color .3s var(--ease)}
+.top.fijo{background:rgba(25,28,32,.96);border-bottom-color:var(--linea-cl)}
+.top__in{display:flex;align-items:center;justify-content:space-between;height:78px;gap:22px;
+  transition:height .3s var(--ease);position:relative}
+.top.fijo .top__in{height:66px}
 .marca{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cal)}
-.marca__sello{
-  width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--cobre);
-  color:var(--cobre);font-family:var(--display);font-weight:800;font-size:.9rem;letter-spacing:.02em;
-}
-.marca__txt{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:-.01em;line-height:1.1}
-.marca__txt span{display:block;font-family:var(--mono);font-weight:400;font-size:.6rem;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--grafito);margin-top:3px}
-.nav{display:flex;align-items:center;gap:30px}
-.nav a{font-size:.92rem;text-decoration:none;color:rgba(255,255,255,.72)}
-.nav a:hover{color:var(--cobre)}
-.top .btn{padding:11px 18px;font-size:.9rem}
-@media(max-width:900px){.nav{display:none}}
+.marca__sello{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1px solid var(--cobre);
+  color:var(--cobre);font-family:var(--display);font-weight:800;font-size:.92rem;
+  transition:background .25s var(--ease),color .25s var(--ease)}
+.marca:hover .marca__sello{background:var(--cobre);color:#1B1310}
+.marca__txt{font-family:var(--display);font-weight:700;font-size:.98rem;line-height:1.1}
+.marca__txt span{display:block;font-family:var(--mono);font-weight:400;font-size:.58rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--grafito-cl);margin-top:4px}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{font-size:.92rem;text-decoration:none;color:rgba(255,255,255,.72);position:relative;padding:4px 0}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--cobre);
+  transition:right .3s var(--ease)}
+.nav a:hover,.nav a.activo{color:var(--cal)}
+.nav a:hover::after,.nav a.activo::after{right:0}
+.top .btn{padding:11px 18px;font-size:.88rem}
+.progreso{position:absolute;left:0;bottom:-1px;height:2px;background:var(--cobre);width:0}
+.menu-btn{display:none;width:42px;height:42px;place-items:center}
+.menu-btn i{display:block;width:20px;height:1.5px;background:var(--cal);position:relative;transition:background .2s}
+.menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;width:20px;height:1.5px;
+  background:var(--cal);transition:transform .3s var(--ease)}
+.menu-btn i::before{top:-6px}.menu-btn i::after{top:6px}
+.menu-btn[aria-expanded="true"] i{background:transparent}
+.menu-btn[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
+.cajon{position:fixed;inset:78px 0 0;z-index:55;background:var(--hormigon);padding:34px 5vw;
+  display:none;flex-direction:column}
+.cajon.abierto{display:flex}
+.cajon a{font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--cal);
+  text-decoration:none;padding:15px 0;border-bottom:1px solid var(--linea-cl)}
+.cajon .btn{margin-top:24px;border-bottom:none}
+@media(max-width:980px){.nav{display:none}.menu-btn{display:grid}.top>.wrap>.btn--cobre{display:none}}
 
-/* ---------- hero: el plano ---------- */
-.hero{
-  background:var(--hormigon);color:var(--cal);position:relative;overflow:hidden;
-  padding:76px 0 88px;
-}
-.hero::before{
-  content:"";position:absolute;inset:0;opacity:.5;
+/* hero */
+.hero{background:var(--hormigon);color:var(--cal);position:relative;overflow:hidden;padding:152px 0 92px}
+.hero::before{content:"";position:absolute;inset:0;opacity:.55;
   background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(120% 90% at 70% 30%,#000 20%,transparent 78%);
-  mask-image:radial-gradient(120% 90% at 70% 30%,#000 20%,transparent 78%);
-}
+  background-size:58px 58px;
+  -webkit-mask-image:radial-gradient(120% 90% at 72% 32%,#000 18%,transparent 76%);
+  mask-image:radial-gradient(120% 90% at 72% 32%,#000 18%,transparent 76%)}
 .hero__in{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}
-.hero h1{font-size:clamp(2.3rem,4.6vw,3.7rem);letter-spacing:-.035em}
+.hero h1{font-size:clamp(2.35rem,4.7vw,3.85rem);letter-spacing:-.038em}
 .hero h1 em{font-style:normal;color:var(--cobre)}
-.hero__bajada{color:rgba(255,255,255,.74);font-size:1.08rem;max-width:46ch;margin:22px 0 34px}
-.hero__acciones{display:flex;flex-wrap:wrap;gap:14px}
-.hero__pie{
-  display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:38px;padding-top:22px;
-  border-top:1px solid rgba(255,255,255,.12);
-  font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(255,255,255,.55);
-}
+.hero__bajada{color:rgba(255,255,255,.75);font-size:1.08rem;max-width:47ch;margin:24px 0 34px}
+.hero__acciones{display:flex;flex-wrap:wrap;gap:13px}
+.hero__pie{display:flex;flex-wrap:wrap;gap:10px 28px;margin:40px 0 0;padding-top:22px;
+  border-top:1px solid var(--linea-cl);font-family:var(--mono);font-size:.71rem;
+  letter-spacing:.06em;color:rgba(255,255,255,.55)}
 .hero__pie b{color:var(--cobre);font-weight:500}
-@media(max-width:900px){
-  .hero{padding:52px 0 64px}
-  .hero__in{grid-template-columns:1fr;gap:40px}
-}
+@media(max-width:980px){.hero{padding:120px 0 62px}.hero__in{grid-template-columns:1fr;gap:42px}}
 
-/* plano SVG */
 .plano{width:100%;height:auto}
 .plano .muro{fill:none;stroke:rgba(255,255,255,.9);stroke-width:5;stroke-linecap:square}
-.plano .fino{fill:none;stroke:rgba(255,255,255,.28);stroke-width:1}
+.plano .fino{fill:none;stroke:rgba(255,255,255,.26);stroke-width:1}
 .plano .cota{fill:none;stroke:var(--cobre);stroke-width:1}
 .plano .mueble{fill:none;stroke:var(--cobre);stroke-width:1.4}
-.plano .rotulo{font-family:var(--mono);font-size:9px;letter-spacing:.14em;fill:rgba(255,255,255,.62)}
+.plano .rotulo{font-family:var(--mono);font-size:9px;letter-spacing:.14em;fill:rgba(255,255,255,.6)}
 .plano .medida{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;fill:var(--cobre)}
 .plano .punto{fill:var(--cobre)}
 @media(prefers-reduced-motion:no-preference){
-  .plano .traza{stroke-dasharray:1;stroke-dashoffset:1;animation:trazar 1.5s ease forwards}
-  .plano .muro.traza{animation-duration:1.9s}
-  .plano .demora-1{animation-delay:.25s}
-  .plano .demora-2{animation-delay:.6s}
-  .plano .aparece{opacity:0;animation:aparecer .7s ease forwards;animation-delay:1.35s}
+  .plano .traza{stroke-dasharray:1;stroke-dashoffset:1;animation:trazar 1.6s var(--ease) forwards;animation-delay:.5s}
+  .plano .d1{animation-delay:.8s}.plano .d2{animation-delay:1.15s}
+  .plano .aparece{opacity:0;animation:aparecer .8s ease forwards;animation-delay:1.9s}
 }
 @keyframes trazar{to{stroke-dashoffset:0}}
 @keyframes aparecer{to{opacity:1}}
 
-/* ---------- franja de compromisos ---------- */
-.franja{background:var(--hormigon-2);color:var(--cal);border-top:1px solid rgba(255,255,255,.08)}
-.franja__in{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1)}
-.franja__it{background:var(--hormigon-2);padding:26px 30px}
-.franja__it h3{font-size:1rem;margin-bottom:6px}
-.franja__it p{margin:0;font-size:.9rem;color:rgba(255,255,255,.6)}
-@media(max-width:780px){.franja__in{grid-template-columns:1fr}}
+/* cinta */
+.cinta{background:var(--hormigon-2);border-block:1px solid var(--linea-cl);overflow:hidden;padding:15px 0}
+.cinta__pista{display:flex;width:max-content;animation:correr 40s linear infinite}
+.cinta__grupo{display:flex;align-items:center;gap:40px;padding-right:40px}
+.cinta span{font-family:var(--mono);font-size:.73rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);white-space:nowrap}
+.cinta b{color:var(--cobre);font-weight:400}
+@keyframes correr{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.cinta__pista{animation:none}}
 
-/* ---------- bloques claros ---------- */
-.bloque{padding:96px 0}
+/* bloques */
+.bloque{padding:104px 0}
 .bloque--borde{border-top:1px solid var(--linea)}
-.bloque__cab{max-width:56ch;margin-bottom:52px}
-.bloque__cab h2{font-size:clamp(1.85rem,3.2vw,2.6rem)}
+.bloque--osc{background:var(--hormigon);color:var(--cal)}
+.bloque--osc .bloque__cab p{color:rgba(255,255,255,.62)}
+.bloque__cab{max-width:58ch;margin-bottom:54px}
+.bloque__cab h2{font-size:clamp(1.9rem,3.3vw,2.7rem)}
 .bloque__cab p{color:var(--grafito);margin:18px 0 0;font-size:1.06rem}
-@media(max-width:780px){.bloque{padding:66px 0}}
+@media(max-width:780px){.bloque{padding:68px 0}}
+
+/* comparador */
+.comp{position:relative;border-radius:var(--r);overflow:hidden;background:var(--hormigon);
+  box-shadow:0 30px 70px -40px rgba(0,0,0,.75);touch-action:pan-y}
+.comp__capa{position:relative;line-height:0}
+.comp__capa svg{width:100%;height:auto;display:block}
+.comp__obra{position:absolute;inset:0;clip-path:inset(0 50% 0 0);will-change:clip-path}
+.comp__tirador{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--cobre);
+  transform:translateX(-1px);pointer-events:none;z-index:3}
+.comp__grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;
+  border-radius:50%;background:var(--cobre);color:#1B1310;display:grid;place-items:center;
+  box-shadow:0 6px 22px rgba(0,0,0,.4)}
+.comp__rango{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:4;margin:0}
+.comp__tag{position:absolute;top:18px;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;
+  padding:7px 12px;border-radius:2px;z-index:2;pointer-events:none}
+.comp__tag--a{left:18px;background:rgba(0,0,0,.45);color:rgba(255,255,255,.8);border:1px solid var(--linea-cl)}
+.comp__tag--b{right:18px;background:var(--cobre);color:#1B1310}
+.comp__pie{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:18px;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--grafito)}
 
 /* servicios */
-.servicios{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
-  border:1px solid var(--linea)}
-.serv{background:var(--yeso);padding:34px 30px 38px;transition:background .2s ease}
-.serv:hover{background:var(--cal)}
-.serv__ico{width:34px;height:34px;margin-bottom:22px;stroke:var(--cobre-osc);fill:none;stroke-width:1.4}
-.serv h3{font-size:1.12rem;margin-bottom:10px}
-.serv p{margin:0;color:var(--grafito);font-size:.95rem}
-.serv__det{margin:16px 0 0;padding:0;list-style:none;font-family:var(--mono);font-size:.7rem;
-  letter-spacing:.06em;color:var(--cobre-osc);display:flex;flex-wrap:wrap;gap:6px 14px}
-@media(max-width:900px){.servicios{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.servicios{grid-template-columns:1fr}}
-
-/* proceso (sí es una secuencia) */
-.proceso{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:paso}
-.paso{padding-top:22px;border-top:2px solid var(--hormigon);position:relative}
-.paso::before{
-  counter-increment:paso;content:"0" counter(paso);
-  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--cobre-osc);
-  display:block;margin-bottom:14px;
+.serv{display:grid;grid-template-columns:.85fr 1.15fr;border:1px solid var(--linea);
+  border-radius:var(--r);overflow:hidden;background:var(--cal)}
+.serv__lista{border-right:1px solid var(--linea);background:var(--yeso)}
+.serv__tab{display:flex;align-items:center;gap:16px;width:100%;text-align:left;padding:22px 24px;
+  border-bottom:1px solid var(--linea);transition:background .2s var(--ease),color .2s var(--ease)}
+.serv__tab:last-child{border-bottom:none}
+.serv__tab svg{width:26px;height:26px;flex:none;stroke:var(--grafito);fill:none;stroke-width:1.4;transition:stroke .2s}
+.serv__tab b{font-family:var(--display);font-weight:600;font-size:1.02rem;flex:1}
+.serv__tab i{font-family:var(--mono);font-style:normal;font-size:.65rem;letter-spacing:.14em;color:var(--grafito-cl)}
+.serv__tab:hover{background:var(--cal)}
+.serv__tab[aria-selected="true"]{background:var(--hormigon);color:var(--cal)}
+.serv__tab[aria-selected="true"] svg{stroke:var(--cobre)}
+.serv__tab[aria-selected="true"] i{color:var(--cobre)}
+.serv__panel{padding:44px 42px}
+.serv__panel.activo{animation:aparecer .45s ease}
+.serv__panel h3{font-size:1.6rem;margin-bottom:14px}
+.serv__panel>p{color:var(--grafito);margin:0 0 26px;max-width:52ch}
+.serv__grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin:0 0 30px;padding:0;list-style:none}
+.serv__grid li{display:flex;gap:10px;font-size:.95rem;align-items:flex-start}
+.serv__grid li::before{content:"";width:6px;height:6px;background:var(--cobre);margin-top:9px;flex:none}
+.serv__meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.serv__meta span{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--grafito);
+  border:1px solid var(--linea);padding:6px 11px;border-radius:2px}
+@media(max-width:900px){
+  .serv{grid-template-columns:1fr}
+  .serv__lista{border-right:none;border-bottom:1px solid var(--linea);display:grid;grid-template-columns:1fr 1fr}
+  .serv__tab{padding:16px 18px}.serv__tab i{display:none}
+  .serv__panel{padding:30px 24px}.serv__grid{grid-template-columns:1fr}
 }
-.paso h3{font-size:1.06rem;margin-bottom:8px}
-.paso p{margin:0;color:var(--grafito);font-size:.93rem}
-@media(max-width:900px){.proceso{grid-template-columns:repeat(2,1fr);gap:26px}}
-@media(max-width:560px){.proceso{grid-template-columns:1fr}}
 
-/* garantía */
-.garantia{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.lista{margin:0;padding:0;list-style:none}
-.lista li{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--linea)}
-.lista li:first-child{border-top:1px solid var(--linea)}
-.lista b{font-family:var(--display);font-size:1rem;display:block;margin-bottom:3px}
-.lista span{color:var(--grafito);font-size:.95rem}
-.lista svg{flex:none;width:20px;height:20px;margin-top:4px;stroke:var(--cobre-osc);fill:none;stroke-width:1.6}
-.cita{
-  background:var(--hormigon);color:var(--cal);padding:38px 34px;border-radius:2px;
-  position:sticky;top:100px;
-}
-.cita p{margin:0 0 26px;font-family:var(--display);font-size:1.3rem;line-height:1.35;letter-spacing:-.02em}
-.cita .dato{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:rgba(255,255,255,.5);
-  display:block;margin-top:20px}
-@media(max-width:900px){.garantia{grid-template-columns:1fr;gap:38px}.cita{position:static}}
+/* cotizador */
+.cotiz{display:grid;grid-template-columns:1.15fr .85fr;border:1px solid var(--linea-cl);
+  border-radius:var(--r);overflow:hidden}
+.cotiz__form{padding:44px 42px;background:var(--hormigon-2)}
+.cotiz__res{padding:44px 42px;background:var(--hormigon-3);display:flex;flex-direction:column}
+.paso-lbl{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;color:var(--cobre);margin:0 0 10px}
+.campo{margin-bottom:32px}
+.campo>label,.campo legend{display:block;font-family:var(--display);font-weight:600;
+  font-size:1.02rem;margin-bottom:14px;padding:0}
+.campo fieldset{border:none;margin:0;padding:0}
+.opciones{display:flex;flex-wrap:wrap;gap:9px}
+.opciones input{position:absolute;opacity:0;pointer-events:none}
+.opciones label{display:inline-flex;align-items:center;padding:11px 16px;border:1px solid var(--linea-cl);
+  border-radius:2px;font-size:.92rem;cursor:pointer;color:rgba(255,255,255,.75);
+  transition:border-color .2s,background .2s,color .2s}
+.opciones label:hover{border-color:var(--cobre)}
+.opciones input:checked+label{background:var(--cobre);border-color:var(--cobre);color:#1B1310;font-weight:600}
+.opciones input:focus-visible+label{outline:2px solid var(--cobre);outline-offset:3px}
+.rango{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--linea-cl);
+  border-radius:2px;margin:26px 0 10px}
+.rango::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;
+  background:var(--cobre);cursor:grab;border:3px solid var(--hormigon-2)}
+.rango::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--cobre);
+  cursor:grab;border:3px solid var(--hormigon-2)}
+.rango-val{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:rgba(255,255,255,.45);
+  display:flex;justify-content:space-between;align-items:baseline;margin:0}
+.rango-val b{color:var(--cal);font-size:1.4rem;font-family:var(--display);letter-spacing:-.02em}
+.cotiz__res h3{font-size:1.15rem;color:var(--cal);margin-bottom:22px}
+.linea-dato{display:flex;justify-content:space-between;gap:14px;padding:13px 0;
+  border-bottom:1px solid var(--linea-cl);font-size:.93rem;color:rgba(255,255,255,.6)}
+.linea-dato b{color:var(--cal);font-weight:600;text-align:right}
+.cotiz__total{margin:26px 0 6px}
+.cotiz__total span{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;color:var(--cobre);
+  display:block;margin-bottom:8px}
+.cotiz__total strong{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.1rem);color:var(--cal);
+  letter-spacing:-.03em;display:block;line-height:1.1}
+.cotiz__nota{font-size:.79rem;color:rgba(255,255,255,.4);margin:14px 0 26px;line-height:1.5}
+.cotiz__res .btn{width:100%;margin-top:auto}
+@media(max-width:900px){.cotiz{grid-template-columns:1fr}.cotiz__form,.cotiz__res{padding:32px 24px}}
 
-/* preguntas */
-.faq{max-width:820px}
+/* obras */
+.filtros{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px}
+.filtro{font-family:var(--mono);font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:10px 16px;border:1px solid var(--linea);border-radius:2px;transition:all .2s var(--ease)}
+.filtro:hover{border-color:var(--cobre-osc);color:var(--cobre-osc)}
+.filtro[aria-pressed="true"]{background:var(--hormigon);border-color:var(--hormigon);color:var(--cal)}
+.obras{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.obra{border:1px solid var(--linea);border-radius:var(--r);overflow:hidden;background:var(--hormigon);
+  text-align:left;display:block;width:100%;padding:0;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.obra:hover{transform:translateY(-4px);box-shadow:0 22px 44px -30px rgba(0,0,0,.55)}
+.obra.oculta{display:none}
+.obra__img{position:relative;display:block;line-height:0}
+.obra__img svg{width:100%;height:auto;display:block}
+.obra__tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.16em;padding:5px 9px;background:rgba(0,0,0,.5);color:var(--cobre);
+  border:1px solid var(--linea-cl);line-height:1.4}
+.obra__txt{display:block;padding:20px 22px 24px;background:var(--cal);border-top:1px solid var(--linea)}
+.obra__txt h3{font-size:1.05rem;margin-bottom:6px}
+.obra__txt p{margin:0;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:var(--grafito)}
+@media(max-width:900px){.obras{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.obras{grid-template-columns:1fr}}
+
+.lb{position:fixed;inset:0;z-index:90;background:rgba(15,17,20,.94);display:none;place-items:center;padding:5vw}
+.lb.abierto{display:grid}
+.lb__caja{max-width:880px;width:100%;background:var(--hormigon);border:1px solid var(--linea-cl);
+  border-radius:var(--r);overflow:hidden}
+.lb__caja svg{width:100%;height:auto;display:block}
+.lb__info{padding:26px 30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.lb__info h3{color:var(--cal);font-size:1.3rem;margin-bottom:8px}
+.lb__info p{margin:0;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--grafito-cl)}
+.lb__cerrar{position:absolute;top:22px;right:26px;width:44px;height:44px;border:1px solid var(--linea-cl);
+  color:var(--cal);display:grid;place-items:center;border-radius:2px;font-size:1.1rem}
+.lb__cerrar:hover{border-color:var(--cobre);color:var(--cobre)}
+
+/* proceso */
+.proc{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:30px;padding-top:2px}
+.proc::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--linea)}
+.proc__prog{position:absolute;top:0;left:0;height:2px;background:var(--cobre);width:0;
+  transition:width 1.4s var(--ease)}
+.paso{padding-top:26px}
+.paso__n{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--cobre-osc);
+  display:block;margin-bottom:14px}
+.paso h3{font-size:1.06rem;margin-bottom:9px}
+.paso p{margin:0;color:var(--grafito);font-size:.94rem}
+@media(max-width:900px){.proc{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.proc{grid-template-columns:1fr}.proc::before,.proc__prog{display:none}
+  .paso{border-top:2px solid var(--linea)}}
+
+/* testimonios: estado vacío diseñado */
+.testi{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi__card{border:1px dashed rgba(255,255,255,.22);border-radius:var(--r);padding:32px 28px;
+  min-height:190px;display:flex;flex-direction:column;justify-content:space-between}
+.testi__card p{margin:0;color:rgba(255,255,255,.5);font-size:.95rem}
+.testi__card span{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--cobre);
+  margin-top:22px;display:block}
+@media(max-width:900px){.testi{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:840px}
 .faq details{border-top:1px solid var(--linea)}
 .faq details:last-of-type{border-bottom:1px solid var(--linea)}
-.faq summary{
-  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
-  font-family:var(--display);font-weight:600;font-size:1.05rem;
-}
+.faq summary{cursor:pointer;list-style:none;padding:24px 46px 24px 0;position:relative;
+  font-family:var(--display);font-weight:600;font-size:1.05rem}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"+";position:absolute;right:8px;top:50%;transform:translateY(-50%);
-  font-family:var(--mono);color:var(--cobre-osc);font-size:1.2rem;
-}
+.faq summary::after{content:"+";position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);color:var(--cobre-osc);font-size:1.25rem}
 .faq details[open] summary::after{content:"–"}
-.faq p{margin:0 0 24px;color:var(--grafito);max-width:66ch}
+.faq p{margin:0 0 26px;color:var(--grafito);max-width:68ch}
 
-/* cierre */
-.cierre{background:var(--hormigon);color:var(--cal);padding:96px 0;text-align:center;position:relative;overflow:hidden}
-.cierre::before{
-  content:"";position:absolute;inset:0;opacity:.35;
+/* contacto */
+.cont{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.form label{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grafito);margin-bottom:9px}
+.form .campo{margin-bottom:22px}
+.form input,.form textarea,.form select{width:100%;padding:15px 16px;border:1px solid var(--linea);
+  border-radius:2px;background:var(--cal);font-family:var(--texto);font-size:1rem;
+  color:var(--hormigon);transition:border-color .2s,box-shadow .2s}
+.form textarea{min-height:132px;resize:vertical}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--cobre);outline:none;
+  box-shadow:0 0 0 3px rgba(197,131,97,.18)}
+.form .error{color:#9E3A22;font-size:.83rem;margin:8px 0 0;display:none}
+.form .campo.mal input,.form .campo.mal textarea{border-color:#9E3A22}
+.form .campo.mal .error{display:block}
+.form .duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form__aviso{font-size:.85rem;color:var(--grafito);margin:16px 0 0}
+.datos{background:var(--cal);border:1px solid var(--linea);border-radius:var(--r);padding:32px}
+.datos__it{padding:20px 0;border-bottom:1px solid var(--linea)}
+.datos__it:first-child{padding-top:0}
+.datos__it:last-child{border-bottom:none;padding-bottom:0}
+.datos__it span{font-family:var(--mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cobre-osc);display:block;margin-bottom:6px}
+.datos__it a,.datos__it p{font-family:var(--display);font-weight:600;font-size:1.06rem;
+  text-decoration:none;margin:0}
+.datos__it a:hover{color:var(--cobre-osc)}
+@media(max-width:900px){.cont{grid-template-columns:1fr;gap:38px}.form .duo{grid-template-columns:1fr}}
+
+/* cierre + pie */
+.cierre{background:var(--hormigon);color:var(--cal);padding:104px 0;text-align:center;
+  position:relative;overflow:hidden}
+.cierre::before{content:"";position:absolute;inset:0;opacity:.35;
   background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(80% 70% at 50% 50%,#000 10%,transparent 75%);
-  mask-image:radial-gradient(80% 70% at 50% 50%,#000 10%,transparent 75%);
-}
+  background-size:58px 58px;
+  -webkit-mask-image:radial-gradient(80% 70% at 50% 50%,#000 8%,transparent 74%);
+  mask-image:radial-gradient(80% 70% at 50% 50%,#000 8%,transparent 74%)}
 .cierre__in{position:relative}
-.cierre h2{font-size:clamp(1.9rem,4vw,3rem);max-width:18ch;margin-inline:auto}
+.cierre h2{font-size:clamp(2rem,4.2vw,3.1rem);max-width:18ch;margin-inline:auto}
 .cierre p{color:rgba(255,255,255,.7);max-width:52ch;margin:20px auto 34px}
-
-/* pie */
-.pie{background:#191C20;color:rgba(255,255,255,.62);padding:52px 0 34px;font-size:.92rem}
-.pie__in{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}
-.pie h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--cobre);margin:0 0 14px;font-weight:500}
-.pie a{text-decoration:none}
-.pie a:hover{color:var(--cobre)}
+.pie{background:var(--hormigon-3);color:rgba(255,255,255,.6);padding:58px 0 34px;font-size:.92rem}
+.pie__in{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px}
+.pie h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cobre);margin:0 0 15px;font-weight:500}
 .pie ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
-.pie__legal{margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);
+.pie a{text-decoration:none}.pie a:hover{color:var(--cobre)}
+.pie__legal{margin-top:44px;padding-top:22px;border-top:1px solid var(--linea-cl);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
-  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:rgba(255,255,255,.35)}
-@media(max-width:780px){.pie__in{grid-template-columns:1fr;gap:26px}}
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;color:rgba(255,255,255,.32)}
+@media(max-width:900px){.pie__in{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pie__in{grid-template-columns:1fr}}
 
-/* barra fija móvil */
-.barra{
-  position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;
-  background:var(--cobre);padding:13px 18px;align-items:center;justify-content:space-between;gap:14px;
-  box-shadow:0 -6px 24px rgba(0,0,0,.25);text-decoration:none;color:#1B1310;
-}
+/* barra móvil + subir */
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;background:var(--cobre);
+  padding:13px 18px;align-items:center;justify-content:space-between;gap:14px;
+  text-decoration:none;color:#1B1310;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
 .barra b{font-family:var(--display);font-size:1rem}
-.barra small{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;opacity:.75}
-@media(max-width:900px){.barra{display:flex}body{padding-bottom:72px}}
+.barra small{display:block;font-family:var(--mono);font-size:.61rem;letter-spacing:.1em;opacity:.75}
+@media(max-width:900px){.barra{display:flex}body{padding-bottom:74px}}
+.subir{position:fixed;right:24px;bottom:24px;z-index:45;width:48px;height:48px;border-radius:50%;
+  background:var(--hormigon);color:var(--cal);display:grid;place-items:center;opacity:0;visibility:hidden;
+  transition:opacity .3s,visibility .3s,background .2s}
+.subir.ver{opacity:1;visibility:visible}
+.subir:hover{background:var(--cobre);color:#1B1310}
+@media(max-width:900px){.subir{bottom:88px;right:16px}}
 
-/* revelado suave */
 @media(prefers-reduced-motion:no-preference){
-  .rev{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .rev{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
   .rev.visible{opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
 
-<header class="top">
+<div id="carga"><div>
+  <div class="carga__sello">ST</div>
+  <div class="carga__barra"><i></i></div>
+</div></div>
+
+<header class="top" id="top">
   <div class="wrap top__in">
     <a class="marca" href="#inicio">
       <span class="marca__sello">ST</span>
       <span class="marca__txt">ST Soluciones Integrales<span>Remodelamos tu mundo</span></span>
     </a>
-    <nav class="nav">
+    <nav class="nav" id="nav">
+      <a href="#comparador">El método</a>
       <a href="#servicios">Servicios</a>
-      <a href="#proceso">Cómo trabajamos</a>
-      <a href="#garantia">Garantía</a>
-      <a href="#preguntas">Preguntas</a>
+      <a href="#cotizador">Cotizador</a>
+      <a href="#obras">Obras</a>
+      <a href="#contacto">Contacto</a>
     </nav>
-    <a class="btn btn--cobre" target="_blank" rel="noopener"
-       href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">
+    <a class="btn btn--cobre" target="_blank" rel="noopener" href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
       Pedir presupuesto
     </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="cajon" aria-label="Abrir menú"><i></i></button>
+    <div class="progreso" id="progreso"></div>
   </div>
 </header>
 
+<div class="cajon" id="cajon">
+  <a href="#comparador">El método</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#cotizador">Cotizador</a>
+  <a href="#obras">Obras</a>
+  <a href="#proceso">Cómo trabajamos</a>
+  <a href="#contacto">Contacto</a>
+  <a class="btn btn--cobre" target="_blank" rel="noopener" href="https://wa.me/59897164582">Escribinos al 097 164 582</a>
+</div>
+
 <main id="inicio">
 
-  <!-- HERO: el plano antes de la obra -->
-  <section class="hero">
-    <div class="wrap hero__in">
-      <div>
-        <p class="eyebrow eyebrow--claro">Reformas integrales · Montevideo</p>
-        <h1>Primero el plano.<br>Después la obra.<br><em>Siempre en fecha.</em></h1>
-        <p class="hero__bajada">
-          Remodelamos casas, apartamentos y locales con un presupuesto cerrado y una fecha
-          de entrega escrita antes de empezar. Vos sabés qué se hace, cuánto cuesta y cuándo termina.
-        </p>
-        <div class="hero__acciones">
-          <a class="btn btn--cobre" target="_blank" rel="noopener"
-             href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
-            Escribinos al 097 164 582
-          </a>
-          <a class="btn btn--linea" href="#servicios">Ver qué hacemos</a>
-        </div>
-        <p class="hero__pie">
-          <span><b>Visita y presupuesto</b> sin costo</span>
-          <span><b>Plazo</b> por escrito</span>
-          <span><b>Obra limpia</b> al entregar</span>
-        </p>
+<section class="hero">
+  <div class="wrap hero__in">
+    <div>
+      <p class="eyebrow eyebrow--cl">Reformas integrales · Montevideo y Canelones</p>
+      <h1>Primero el plano.<br>Después la obra.<br><em>Siempre en fecha.</em></h1>
+      <p class="hero__bajada">Remodelamos casas, apartamentos y locales con presupuesto cerrado y fecha de entrega escrita antes de empezar. Vos sabés qué se hace, cuánto cuesta y cuándo termina.</p>
+      <div class="hero__acciones">
+        <a class="btn btn--cobre" target="_blank" rel="noopener" href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+          Escribinos al 097 164 582
+        </a>
+        <a class="btn btn--linea" href="#cotizador">Estimar mi reforma</a>
       </div>
+      <p class="hero__pie">
+        <span><b>Visita y presupuesto</b> sin costo</span>
+        <span><b>Plazo</b> por escrito</span>
+        <span><b>Obra limpia</b> al entregar</span>
+      </p>
+    </div>
+    <div>
+      <svg class="plano" viewBox="0 0 520 400" role="img" aria-label="Plano en planta de una vivienda con living, cocina, baño y dormitorio">
+        <g class="cota">
+          <path class="traza" pathLength="1" d="M40 34 H480"/>
+          <path d="M40 28 V40 M280 28 V40 M480 28 V40"/>
+          <path class="traza d1" pathLength="1" d="M18 60 V340"/>
+          <path d="M12 60 H24 M12 340 H24"/>
+        </g>
+        <text class="medida aparece" x="150" y="24" text-anchor="middle">5.20 m</text>
+        <text class="medida aparece" x="380" y="24" text-anchor="middle">4.30 m</text>
+        <text class="medida aparece" x="14" y="204" text-anchor="middle" transform="rotate(-90 14 204)">6.10 m</text>
+        <g class="muro">
+          <path class="traza" pathLength="1" d="M40 60 H480 V340 H40 V285"/>
+          <path class="traza d1" pathLength="1" d="M40 240 V60"/>
+          <path class="traza d1" pathLength="1" d="M280 60 V150 M280 190 V340"/>
+          <path class="traza d2" pathLength="1" d="M280 200 H320 M355 200 H480"/>
+          <path class="traza d2" pathLength="1" d="M380 200 V255 M380 292 V340"/>
+        </g>
+        <g class="fino aparece">
+          <path d="M280 150 A40 40 0 0 1 320 190"/>
+          <path d="M320 200 A35 35 0 0 1 355 235"/>
+          <path d="M380 255 A37 37 0 0 0 417 292"/>
+        </g>
+        <g class="mueble aparece">
+          <rect x="70" y="255" width="120" height="42"/>
+          <rect x="205" y="120" width="46" height="96"/>
+          <path d="M300 80 H460 M300 80 V116 M460 80 V116 M300 116 H460"/>
+          <circle cx="330" cy="98" r="9"/>
+          <rect x="300" y="230" width="30" height="52"/>
+          <circle cx="350" cy="300" r="13"/>
+          <rect x="400" y="230" width="62" height="82"/>
+        </g>
+        <g class="aparece">
+          <text class="rotulo" x="70" y="100">LIVING</text>
+          <text class="rotulo" x="300" y="150">COCINA</text>
+          <text class="rotulo" x="300" y="330">BAÑO</text>
+          <text class="rotulo" x="400" y="330">DORM.</text>
+          <text class="rotulo" x="46" y="268" transform="rotate(-90 46 268)">ACCESO</text>
+          <circle class="punto" cx="330" cy="141" r="3.4"/>
+          <circle class="punto" cx="330" cy="321" r="3.4"/>
+          <circle class="punto" cx="100" cy="91" r="3.4"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
 
-      <!-- Plano en planta: se dibuja al cargar -->
-      <div>
-        <svg class="plano" viewBox="0 0 520 400" role="img"
-             aria-label="Plano en planta de una vivienda con living, cocina, baño y dormitorio marcados">
-          <!-- cotas -->
-          <g class="cota">
-            <path class="traza" pathLength="1" d="M40 34 H480"/>
-            <path d="M40 28 V40 M280 28 V40 M480 28 V40"/>
-            <path class="traza demora-1" pathLength="1" d="M18 60 V340"/>
-            <path d="M12 60 H24 M12 340 H24"/>
-          </g>
-          <text class="medida aparece" x="150" y="24" text-anchor="middle">5.20 m</text>
-          <text class="medida aparece" x="380" y="24" text-anchor="middle">4.30 m</text>
-          <text class="medida aparece" x="14" y="204" text-anchor="middle" transform="rotate(-90 14 204)">6.10 m</text>
+<div class="cinta" aria-hidden="true">
+  <div class="cinta__pista">
+    <div class="cinta__grupo">
+      <span>Albañilería</span><b>·</b><span>Sanitaria</span><b>·</b><span>Eléctrica</span><b>·</b><span>Yeso y pintura</span><b>·</b><span>Porcelanato</span><b>·</b><span>Carpintería</span><b>·</b><span>Impermeabilización</span><b>·</b><span>Iluminación LED</span><b>·</b>
+    </div>
+    <div class="cinta__grupo">
+      <span>Albañilería</span><b>·</b><span>Sanitaria</span><b>·</b><span>Eléctrica</span><b>·</b><span>Yeso y pintura</span><b>·</b><span>Porcelanato</span><b>·</b><span>Carpintería</span><b>·</b><span>Impermeabilización</span><b>·</b><span>Iluminación LED</span><b>·</b>
+    </div>
+  </div>
+</div>
 
-          <!-- muros exteriores con vano de entrada -->
-          <g class="muro">
-            <path class="traza" pathLength="1" d="M40 60 H480 V340 H40 V285"/>
-            <path class="traza demora-1" pathLength="1" d="M40 240 V60"/>
+<!-- COMPARADOR -->
+<section class="bloque" id="comparador">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow">El método</p>
+      <h2>Vas a ver tu reforma antes de que empiece.</h2>
+      <p>Antes de tocar una pared te mostramos el proyecto: distribución, materiales y terminaciones. Recién cuando lo aprobás, arranca la obra. Arrastrá para ver el paso.</p>
+    </div>
+
+    <div class="comp rev" id="comp">
+      <span class="comp__tag comp__tag--a">PROYECTO</span>
+      <span class="comp__tag comp__tag--b">OBRA TERMINADA</span>
+
+      <div class="comp__capa">
+        <svg viewBox="0 0 1000 620" role="img" aria-label="El ambiente en versión proyecto, dibujado en líneas">
+          <rect width="1000" height="620" fill="#22262B"/>
+          <g fill="none" stroke="rgba(255,255,255,.72)" stroke-width="1.6">
+            <path d="M250 140 H750 V460 H250 Z"/>
+            <path d="M0 0 L250 140 M1000 0 L750 140 M0 620 L250 460 M1000 620 L750 460"/>
+            <path d="M540 195 H710 V345 H540 Z M625 195 V345 M540 270 H710"/>
+            <path d="M787 221 L862 204 V532 L787 484 Z"/>
+            <path d="M225 371 L62 416 L150 452 L292 392 Z M292 392 V500 L150 596 V452"/>
+            <path d="M225 476 L62 580"/>
+            <path d="M400 505 H600 L640 540 H360 Z M360 540 V585 H640 V540"/>
+            <path d="M460 140 V300 M540 140 V300"/>
+            <path d="M432 300 H488 L474 322 H446 Z M512 300 H568 L554 322 H526 Z"/>
           </g>
-          <!-- muros interiores -->
-          <g class="muro">
-            <path class="traza demora-1" pathLength="1" d="M280 60 V150 M280 190 V340"/>
-            <path class="traza demora-2" pathLength="1" d="M280 200 H320 M355 200 H480"/>
-            <path class="traza demora-2" pathLength="1" d="M380 200 V255 M380 292 V340"/>
+          <g fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1">
+            <path d="M0 210 L250 245 M1000 210 L750 245 M300 460 L250 620 M700 460 L750 620"/>
           </g>
-          <!-- barrido de puertas -->
-          <g class="fino aparece">
-            <path d="M280 150 A40 40 0 0 1 320 190"/>
-            <path d="M320 200 A35 35 0 0 1 355 235"/>
-            <path d="M380 255 A37 37 0 0 0 417 292"/>
+          <g fill="none" stroke="#C58361" stroke-width="1">
+            <path d="M250 552 H750 M250 546 V558 M750 546 V558"/>
+            <path d="M812 150 H860 M836 150 V204"/>
           </g>
-          <!-- mobiliario -->
-          <g class="mueble aparece">
-            <rect x="70" y="255" width="120" height="42"/>
-            <rect x="205" y="120" width="46" height="96"/>
-            <path d="M300 80 H460 M300 80 V116 M460 80 V116 M300 116 H460"/>
-            <circle cx="330" cy="98" r="9"/>
-            <rect x="300" y="230" width="30" height="52"/>
-            <circle cx="350" cy="300" r="13"/>
-            <rect x="400" y="230" width="62" height="82"/>
+          <g font-family="Azeret Mono, monospace" font-size="11" letter-spacing="1.6" fill="rgba(255,255,255,.5)">
+            <text x="296" y="352">MESADA H=0.90</text>
+            <text x="560" y="400">PORCELANATO 60×60</text>
+            <text x="800" y="586">VANO 0.80</text>
           </g>
-          <!-- rótulos -->
-          <g class="aparece">
-            <text class="rotulo" x="70" y="100">LIVING</text>
-            <text class="rotulo" x="300" y="150">COCINA</text>
-            <text class="rotulo" x="300" y="330">BAÑO</text>
-            <text class="rotulo" x="400" y="330">DORM.</text>
-            <text class="rotulo" x="46" y="268" transform="rotate(-90 46 268)">ACCESO</text>
-            <circle class="punto" cx="330" cy="141" r="3.4"/>
-            <circle class="punto" cx="330" cy="321" r="3.4"/>
-            <circle class="punto" cx="100" cy="91" r="3.4"/>
+          <g font-family="Azeret Mono, monospace" font-size="11" letter-spacing="1.6" fill="#C58361">
+            <text x="500" y="576" text-anchor="middle">4.60 m</text>
+            <text x="470" y="132" text-anchor="middle">LED 3000K</text>
           </g>
         </svg>
       </div>
+
+      <div class="comp__capa comp__obra" id="compObra" aria-hidden="true">
+        <svg viewBox="0 0 1000 620">
+          <defs>
+            <linearGradient id="piso" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#B08256"/><stop offset="1" stop-color="#8A6340"/>
+            </linearGradient>
+            <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#CFE0E8"/><stop offset="1" stop-color="#A9C2CE"/>
+            </linearGradient>
+            <radialGradient id="luz">
+              <stop offset="0" stop-color="#C58361" stop-opacity=".5"/>
+              <stop offset="1" stop-color="#C58361" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="1000" height="620" fill="#E5E2DA"/>
+          <path d="M0 0 L250 140 V460 L0 620 Z" fill="#DFDCD3"/>
+          <path d="M1000 0 L750 140 V460 L1000 620 Z" fill="#DFDCD3"/>
+          <path d="M0 0 H1000 L750 140 H250 Z" fill="#F4F2EC"/>
+          <rect x="250" y="140" width="500" height="320" fill="#EAE7DF"/>
+          <path d="M0 620 H1000 L750 460 H250 Z" fill="url(#piso)"/>
+          <g stroke="rgba(0,0,0,.13)" stroke-width="1" fill="none">
+            <path d="M330 460 L250 620 M420 460 L400 620 M510 460 L540 620 M600 460 L690 620 M680 460 L840 620"/>
+            <path d="M250 500 H750 M215 545 H785 M170 600 H830"/>
+          </g>
+          <rect x="540" y="195" width="170" height="150" fill="url(#cielo)"/>
+          <path d="M540 195 H710 V345 H540 Z M625 195 V345 M540 270 H710" fill="none" stroke="#F4F2EC" stroke-width="5"/>
+          <path d="M540 345 L470 460 L640 460 L710 345 Z" fill="#FFFFFF" opacity=".15"/>
+          <path d="M787 221 L862 204 V532 L787 484 Z" fill="#D8D4CA" stroke="#C4BFB3" stroke-width="3"/>
+          <rect x="795" y="360" width="7" height="26" rx="3" fill="#C58361"/>
+          <path d="M292 392 V500 L150 596 V452 Z" fill="#2A2F35"/>
+          <path d="M225 371 L62 416 L150 452 L292 392 Z" fill="#3A4046"/>
+          <path d="M270 415 L230 428 M215 440 L175 455" stroke="#C58361" stroke-width="4" stroke-linecap="round"/>
+          <path d="M400 505 H600 L640 540 H360 Z" fill="#7A7F86"/>
+          <path d="M360 540 V585 H640 V540 Z" fill="#666B72"/>
+          <path d="M430 505 h60 v-26 h-60 Z" fill="#C58361" opacity=".9"/>
+          <circle cx="460" cy="312" r="115" fill="url(#luz)"/>
+          <circle cx="540" cy="312" r="115" fill="url(#luz)"/>
+          <path d="M460 140 V300 M540 140 V300" stroke="#3A4046" stroke-width="2"/>
+          <path d="M432 300 H488 L474 322 H446 Z M512 300 H568 L554 322 H526 Z" fill="#C58361"/>
+        </svg>
+      </div>
+
+      <div class="comp__tirador" id="compTirador">
+        <span class="comp__grip" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg>
+        </span>
+      </div>
+      <label class="oculto" for="compRango">Comparar proyecto y obra terminada</label>
+      <input class="comp__rango" id="compRango" type="range" min="0" max="100" value="50">
     </div>
-  </section>
 
-  <!-- COMPROMISOS -->
-  <section class="franja">
-    <div class="wrap franja__in">
-      <div class="franja__it">
-        <h3>Presupuesto cerrado</h3>
-        <p>Detallado por rubro. Lo que firmás es lo que pagás.</p>
-      </div>
-      <div class="franja__it">
-        <h3>Fecha de entrega</h3>
-        <p>Cronograma por escrito y avance informado semana a semana.</p>
-      </div>
-      <div class="franja__it">
-        <h3>Un solo responsable</h3>
-        <p>Coordinamos todos los oficios. Vos hablás con una sola persona.</p>
-      </div>
+    <p class="comp__pie rev">
+      <span>ILUSTRACIÓN DE PROYECTO · REEMPLAZABLE POR FOTOS DE OBRA REAL</span>
+      <span>ARRASTRÁ O USÁ LAS FLECHAS ← →</span>
+    </p>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="bloque bloque--borde" id="servicios">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow">Servicios</p>
+      <h2>Hacemos la obra completa o el rubro puntual.</h2>
+      <p>En los dos casos coordinamos los oficios, cuidamos lo que no se toca y entregamos el ambiente listo para usar.</p>
     </div>
-  </section>
 
-  <!-- SERVICIOS -->
-  <section class="bloque" id="servicios">
-    <div class="wrap">
-      <div class="bloque__cab rev">
-        <p class="eyebrow">Servicios</p>
-        <h2>Todo lo que hace falta para dejar el espacio terminado.</h2>
-        <p>Trabajamos la obra completa o el rubro puntual que necesites. En los dos casos dejamos el ambiente listo para usar.</p>
+    <div class="serv rev">
+      <div class="serv__lista" role="tablist" aria-label="Servicios">
+        <button class="serv__tab" role="tab" aria-selected="true" aria-controls="p1" id="t1">
+          <svg viewBox="0 0 32 32"><path d="M3 27h26M6 27V13l10-8 10 8v14M13 27v-8h6v8"/></svg><b>Reforma integral</b><i>01</i>
+        </button>
+        <button class="serv__tab" role="tab" aria-selected="false" aria-controls="p2" id="t2" tabindex="-1">
+          <svg viewBox="0 0 32 32"><path d="M4 6h24v20H4zM4 14h24M11 6v8M9 20h6M22 19a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg><b>Cocinas</b><i>02</i>
+        </button>
+        <button class="serv__tab" role="tab" aria-selected="false" aria-controls="p3" id="t3" tabindex="-1">
+          <svg viewBox="0 0 32 32"><path d="M5 17h22v4a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5zM9 17V8a3 3 0 0 1 6 0M9 26l-2 3M23 26l2 3"/></svg><b>Baños</b><i>03</i>
+        </button>
+        <button class="serv__tab" role="tab" aria-selected="false" aria-controls="p4" id="t4" tabindex="-1">
+          <svg viewBox="0 0 32 32"><path d="M6 5h20v9H6zM16 14v5M13 19h6v8h-6z"/></svg><b>Pintura y yeso</b><i>04</i>
+        </button>
+        <button class="serv__tab" role="tab" aria-selected="false" aria-controls="p5" id="t5" tabindex="-1">
+          <svg viewBox="0 0 32 32"><path d="M16 4v3M6 9l2 2M26 9l-2 2M11 17a5 5 0 1 1 10 0c0 2-1 3-1.5 4.5h-7C12 20 11 19 11 17ZM13 25h6M14 28h4"/></svg><b>Iluminación y eléctrica</b><i>05</i>
+        </button>
+        <button class="serv__tab" role="tab" aria-selected="false" aria-controls="p6" id="t6" tabindex="-1">
+          <svg viewBox="0 0 32 32"><path d="M4 8h24v16H4zM4 15h24M12 8v7M20 15v9"/></svg><b>Carpintería y placares</b><i>06</i>
+        </button>
       </div>
 
-      <div class="servicios rev">
-        <article class="serv">
-          <svg class="serv__ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 27h26M6 27V13l10-8 10 8v14M13 27v-8h6v8"/></svg>
+      <div>
+        <div class="serv__panel activo" role="tabpanel" id="p1" aria-labelledby="t1">
           <h3>Reforma integral</h3>
-          <p>Rediseño completo de la vivienda o el local, con dirección de obra y todos los oficios coordinados.</p>
-          <ul class="serv__det"><li>Demolición</li><li>Albañilería</li><li>Sanitaria</li></ul>
-        </article>
-        <article class="serv">
-          <svg class="serv__ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 6h24v20H4zM4 14h24M11 6v8M9 20h6M22 19a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg>
+          <p>Rediseñamos la vivienda o el local completo: distribución, instalaciones y terminaciones, con dirección de obra y un cronograma que podés seguir semana a semana.</p>
+          <ul class="serv__grid">
+            <li>Demolición y retiro de escombros</li><li>Movimiento de tabiques</li>
+            <li>Instalación sanitaria nueva</li><li>Instalación eléctrica nueva</li>
+            <li>Pisos, revestimientos y cielorrasos</li><li>Aberturas y terminaciones</li>
+          </ul>
+          <div class="serv__meta"><span>PLAZO TÍPICO 8–16 SEMANAS</span><span>DIRECCIÓN DE OBRA INCLUIDA</span></div>
+          <a class="btn btn--osc" href="#cotizador">Estimar esta reforma</a>
+        </div>
+        <div class="serv__panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
           <h3>Cocinas</h3>
-          <p>Muebles a medida, mesadas, revestimientos e instalación de artefactos. Diseñamos el uso, no solo el mueble.</p>
-          <ul class="serv__det"><li>Mesadas</li><li>Bajo mesada</li><li>Griferías</li></ul>
-        </article>
-        <article class="serv">
-          <svg class="serv__ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 17h22v4a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5zM9 17V8a3 3 0 0 1 6 0M9 26l-2 3M23 26l2 3"/></svg>
+          <p>Diseñamos primero el uso —dónde cocinás, dónde apoyás, dónde guardás— y después el mueble. Fabricamos a medida y dejamos los artefactos instalados y probados.</p>
+          <ul class="serv__grid">
+            <li>Muebles a medida, altos y bajos</li><li>Mesadas de granito, cuarzo o compacto</li>
+            <li>Revestimiento y frentín</li><li>Instalación de campana y horno</li>
+            <li>Griferías y bacha</li><li>Iluminación bajo alacena</li>
+          </ul>
+          <div class="serv__meta"><span>PLAZO TÍPICO 3–5 SEMANAS</span><span>HERRAJES CON GARANTÍA</span></div>
+          <a class="btn btn--osc" href="#cotizador">Estimar mi cocina</a>
+        </div>
+        <div class="serv__panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
           <h3>Baños</h3>
-          <p>Renovación total con impermeabilización, cambio de cañerías, porcelanato y mampara.</p>
-          <ul class="serv__det"><li>Impermeabilización</li><li>Porcelanato</li><li>Mamparas</li></ul>
-        </article>
-        <article class="serv">
-          <svg class="serv__ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 5h20v9H6zM16 14v5M13 19h6v8h-6z"/></svg>
+          <p>Renovación completa desde la cañería para adentro. Impermeabilizamos antes de revestir: es el paso que evita la humedad que aparece dos años después.</p>
+          <ul class="serv__grid">
+            <li>Cambio de cañerías y desagües</li><li>Impermeabilización de piso y muro</li>
+            <li>Porcelanato y venecitas</li><li>Mamparas y accesorios</li>
+            <li>Mueble bajo bacha</li><li>Ventilación forzada</li>
+          </ul>
+          <div class="serv__meta"><span>PLAZO TÍPICO 2–3 SEMANAS</span><span>IMPERMEABILIZACIÓN GARANTIZADA</span></div>
+          <a class="btn btn--osc" href="#cotizador">Estimar mi baño</a>
+        </div>
+        <div class="serv__panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
           <h3>Pintura y yeso</h3>
-          <p>Reparación de humedades, enduido, yeso proyectado y terminación pareja en paredes y cielorrasos.</p>
-          <ul class="serv__det"><li>Humedades</li><li>Enduido</li><li>Cielorrasos</li></ul>
-        </article>
-        <article class="serv">
-          <svg class="serv__ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v3M6 9l2 2M26 9l-2 2M11 17a5 5 0 1 1 10 0c0 2-1 3-1.5 4.5h-7C12 20 11 19 11 17ZM13 25h6M14 28h4"/></svg>
+          <p>Antes de pintar resolvemos la causa: filtración, condensación o revoque flojo. Después viene el enduido, el lijado y una terminación pareja que no se nota al mirarla de costado.</p>
+          <ul class="serv__grid">
+            <li>Diagnóstico y tratamiento de humedad</li><li>Enduido y lijado</li>
+            <li>Yeso proyectado</li><li>Cielorrasos y molduras</li>
+            <li>Pintura interior y exterior</li><li>Esmalte en aberturas</li>
+          </ul>
+          <div class="serv__meta"><span>PLAZO TÍPICO 1–3 SEMANAS</span><span>PROTECCIÓN DE MUEBLES Y PISOS</span></div>
+          <a class="btn btn--osc" href="#cotizador">Estimar el trabajo</a>
+        </div>
+        <div class="serv__panel" role="tabpanel" id="p5" aria-labelledby="t5" hidden>
           <h3>Iluminación y eléctrica</h3>
-          <p>Tableros, cableado, spots LED y luz indirecta pensada ambiente por ambiente.</p>
-          <ul class="serv__det"><li>Tableros</li><li>Spots LED</li><li>Luz indirecta</li></ul>
-        </article>
-        <article class="serv">
-          <svg class="serv__ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 8h24v16H4zM4 15h24M12 8v7M20 15v9"/></svg>
+          <p>Proyectamos la luz ambiente por ambiente: general, de trabajo y de acento. En paralelo revisamos el tablero, porque una instalación vieja no soporta lo que le pedimos hoy.</p>
+          <ul class="serv__grid">
+            <li>Tablero y disyuntores</li><li>Recableado y nuevas bocas</li>
+            <li>Spots y perfilería LED</li><li>Luz indirecta en cielorraso</li>
+            <li>Tomas para cocina y aire</li><li>Exterior y jardín</li>
+          </ul>
+          <div class="serv__meta"><span>PLAZO TÍPICO 1–2 SEMANAS</span><span>MATERIAL CERTIFICADO</span></div>
+          <a class="btn btn--osc" href="#cotizador">Estimar el trabajo</a>
+        </div>
+        <div class="serv__panel" role="tabpanel" id="p6" aria-labelledby="t6" hidden>
           <h3>Carpintería y placares</h3>
-          <p>Placares, vestidores, aberturas y detalles en madera con herrajes que duran.</p>
-          <ul class="serv__det"><li>Placares</li><li>Vestidores</li><li>Aberturas</li></ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESO -->
-  <section class="bloque bloque--borde" id="proceso">
-    <div class="wrap">
-      <div class="bloque__cab rev">
-        <p class="eyebrow">Cómo trabajamos</p>
-        <h2>Cuatro pasos, sin sorpresas en el medio.</h2>
-      </div>
-      <div class="proceso rev">
-        <div class="paso">
-          <h3>Visita y medición</h3>
-          <p>Vamos al lugar, tomamos medidas y escuchamos qué querés lograr. Sin costo y sin compromiso.</p>
-        </div>
-        <div class="paso">
-          <h3>Propuesta y precio</h3>
-          <p>Recibís el detalle por rubro, los materiales incluidos y el plazo de obra en un solo documento.</p>
-        </div>
-        <div class="paso">
-          <h3>Obra</h3>
-          <p>Un responsable coordina al equipo, protege lo que no se toca y te informa el avance cada semana.</p>
-        </div>
-        <div class="paso">
-          <h3>Entrega</h3>
-          <p>Repasamos juntos cada detalle, corregimos lo que haga falta y te entregamos el espacio limpio.</p>
+          <p>Placares, vestidores y muebles a medida aprovechando el espacio real que tenés, con herrajes que abren y cierran igual de bien dentro de diez años.</p>
+          <ul class="serv__grid">
+            <li>Placares y vestidores</li><li>Muebles de baño y living</li>
+            <li>Puertas y marcos</li><li>Estanterías y escritorios</li>
+            <li>Frentes corredizos</li><li>Terminación laca o melamina</li>
+          </ul>
+          <div class="serv__meta"><span>PLAZO TÍPICO 2–4 SEMANAS</span><span>MEDICIÓN EN OBRA</span></div>
+          <a class="btn btn--osc" href="#cotizador">Estimar el trabajo</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- GARANTÍA -->
-  <section class="bloque bloque--borde" id="garantia">
-    <div class="wrap garantia">
-      <div class="rev">
-        <p class="eyebrow">Garantía</p>
-        <h2 style="font-size:clamp(1.85rem,3.2vw,2.6rem);margin-bottom:34px">Lo que te llevás además de la obra.</h2>
-        <ul class="lista">
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.2 8 11 4.6-1.8 8-6 8-11V5zM9 12l2 2 4-4"/></svg>
-            <span><b>Garantía escrita por mano de obra</b>Si algo falla dentro del plazo acordado, volvemos y lo resolvemos.</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20V9l6-5 6 5v11M10 20v-6h4v6"/></svg>
-            <span><b>Materiales de primeras marcas</b>Te decimos marca y modelo de cada cosa antes de comprarla.</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
-            <span><b>Personal formal y asegurado</b>Equipo propio y proveedores de confianza, con la documentación al día.</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11Z"/><circle cx="12" cy="11" r="3"/></svg>
-            <span><b>Trabajamos en Montevideo y Canelones</b>Consultanos por otras zonas antes de descartar tu obra.</span>
-          </li>
-        </ul>
+<!-- COTIZADOR -->
+<section class="bloque bloque--osc" id="cotizador">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow eyebrow--cl">Cotizador</p>
+      <h2>Una idea del orden de inversión, en 30 segundos.</h2>
+      <p>Elegí qué querés reformar, cuántos metros tiene y qué nivel de terminación buscás. Te damos un rango orientativo y armamos el mensaje para que nos lo mandes por WhatsApp.</p>
+    </div>
+
+    <div class="cotiz rev">
+      <div class="cotiz__form">
+        <div class="campo">
+          <p class="paso-lbl">PASO 01</p>
+          <fieldset>
+            <legend>¿Qué querés reformar?</legend>
+            <div class="opciones" id="ambientes">
+              <input type="radio" name="amb" id="a1" value="cocina" checked><label for="a1">Cocina</label>
+              <input type="radio" name="amb" id="a2" value="bano"><label for="a2">Baño</label>
+              <input type="radio" name="amb" id="a3" value="living"><label for="a3">Living / comedor</label>
+              <input type="radio" name="amb" id="a4" value="dorm"><label for="a4">Dormitorio</label>
+              <input type="radio" name="amb" id="a5" value="local"><label for="a5">Local comercial</label>
+              <input type="radio" name="amb" id="a6" value="casa"><label for="a6">Vivienda completa</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="campo">
+          <p class="paso-lbl">PASO 02</p>
+          <label for="m2">¿Cuántos metros cuadrados tiene?</label>
+          <input class="rango" id="m2" type="range" min="4" max="180" step="1" value="12">
+          <p class="rango-val"><span>4 m²</span><b id="m2Val">12 m²</b><span>180 m²</span></p>
+        </div>
+
+        <div class="campo" style="margin-bottom:0">
+          <p class="paso-lbl">PASO 03</p>
+          <fieldset>
+            <legend>Nivel de terminación</legend>
+            <div class="opciones" id="niveles">
+              <input type="radio" name="niv" id="n1" value="estandar" checked><label for="n1">Estándar</label>
+              <input type="radio" name="niv" id="n2" value="superior"><label for="n2">Superior</label>
+              <input type="radio" name="niv" id="n3" value="premium"><label for="n3">Premium</label>
+            </div>
+          </fieldset>
+        </div>
       </div>
 
-      <aside class="cita rev">
-        <p>Contanos qué querés cambiar y te decimos qué implica, cuánto sale y cuánto demora.</p>
-        <a class="btn btn--cobre" target="_blank" rel="noopener"
-           href="https://wa.me/59897164582?text=Hola,%20quiero%20coordinar%20una%20visita%20para%20presupuestar%20una%20reforma.">
+      <div class="cotiz__res">
+        <h3>Tu estimación</h3>
+        <div class="linea-dato"><span>Ambiente</span><b id="rAmb">Cocina</b></div>
+        <div class="linea-dato"><span>Superficie</span><b id="rM2">12 m²</b></div>
+        <div class="linea-dato"><span>Terminación</span><b id="rNiv">Estándar</b></div>
+        <div class="linea-dato"><span>Plazo estimado</span><b id="rPlazo">3 semanas</b></div>
+
+        <div class="cotiz__total" id="bloqueTotal">
+          <span>RANGO ORIENTATIVO</span>
+          <strong id="rTotal">—</strong>
+        </div>
+        <p class="cotiz__nota">Estimación calculada con valores de referencia por m². No sustituye al presupuesto: el precio final surge de la visita y del estado real de las instalaciones.</p>
+
+        <a class="btn btn--cobre" id="rWhats" target="_blank" rel="noopener" href="https://wa.me/59897164582">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
-          Coordinar la visita
+          Enviar esto por WhatsApp
         </a>
-        <span class="dato">WHATSAPP 097 164 582 · LUN A SÁB 8:00–19:00</span>
-      </aside>
-    </div>
-  </section>
-
-  <!-- PREGUNTAS -->
-  <section class="bloque bloque--borde" id="preguntas">
-    <div class="wrap">
-      <div class="bloque__cab rev">
-        <p class="eyebrow">Preguntas frecuentes</p>
-        <h2>Lo que casi todos nos preguntan antes de empezar.</h2>
-      </div>
-      <div class="faq rev">
-        <details>
-          <summary>¿La visita y el presupuesto tienen costo?</summary>
-          <p>No. Vamos, medimos y te pasamos la propuesta sin cargo. Recién si te sirve avanzamos.</p>
-        </details>
-        <details>
-          <summary>¿Puedo seguir viviendo en la casa durante la obra?</summary>
-          <p>En la mayoría de las reformas sí. Trabajamos por sectores, protegemos muebles y pisos, y te decimos de antemano qué días vas a tener el baño o la cocina fuera de servicio.</p>
-        </details>
-        <details>
-          <summary>¿Cuánto demora una reforma?</summary>
-          <p>Depende del alcance: un baño completo suele llevar entre dos y tres semanas, y una reforma integral varios meses. El plazo exacto de tu obra queda escrito en el presupuesto.</p>
-        </details>
-        <details>
-          <summary>¿Los materiales los ponen ustedes?</summary>
-          <p>Como prefieras. Podemos incluirlos en el presupuesto con marca y modelo a la vista, o trabajar con los que vos compres.</p>
-        </details>
-        <details>
-          <summary>¿Cómo se paga?</summary>
-          <p>Con un anticipo para arrancar y pagos por avance de obra, según el cronograma acordado. Todo queda por escrito antes de empezar.</p>
-        </details>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CIERRE -->
-  <section class="cierre">
-    <div class="wrap cierre__in">
-      <h2>Empecemos por el plano de tu espacio.</h2>
-      <p>Mandanos un mensaje con lo que querés cambiar. Si podés, sumá una foto: con eso ya te damos una primera idea de plazo y costo.</p>
-      <a class="btn btn--cobre" target="_blank" rel="noopener"
-         href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
-        Escribinos al 097 164 582
-      </a>
+<!-- OBRAS -->
+<section class="bloque" id="obras">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow">Obras</p>
+      <h2>Trabajos que podés recorrer.</h2>
+      <p>Cada ficha muestra el alcance real: qué se cambió, cuánto duró y con qué materiales se resolvió.</p>
     </div>
-  </section>
+
+    <div class="filtros rev" role="group" aria-label="Filtrar obras">
+      <button class="filtro" data-f="todas" aria-pressed="true">Todas</button>
+      <button class="filtro" data-f="cocina" aria-pressed="false">Cocinas</button>
+      <button class="filtro" data-f="bano" aria-pressed="false">Baños</button>
+      <button class="filtro" data-f="integral" aria-pressed="false">Integrales</button>
+      <button class="filtro" data-f="local" aria-pressed="false">Comerciales</button>
+    </div>
+
+    <div class="obras rev" id="listaObras"></div>
+  </div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTit">
+  <button class="lb__cerrar" id="lbCerrar" aria-label="Cerrar">✕</button>
+  <div class="lb__caja">
+    <div id="lbImg"></div>
+    <div class="lb__info">
+      <div><h3 id="lbTit"></h3><p id="lbSub"></p></div>
+      <a class="btn btn--cobre btn--min" target="_blank" rel="noopener" href="https://wa.me/59897164582?text=Hola,%20vi%20las%20obras%20en%20la%20web%20y%20quiero%20algo%20parecido.">Quiero algo así</a>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESO -->
+<section class="bloque bloque--borde" id="proceso">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow">Cómo trabajamos</p>
+      <h2>Cuatro pasos, sin sorpresas en el medio.</h2>
+    </div>
+    <div class="proc rev" id="proc">
+      <div class="proc__prog" id="procProg"></div>
+      <div class="paso"><span class="paso__n">01</span><h3>Visita y medición</h3><p>Vamos al lugar, tomamos medidas y escuchamos qué querés lograr. Sin costo y sin compromiso.</p></div>
+      <div class="paso"><span class="paso__n">02</span><h3>Propuesta y precio</h3><p>Recibís el detalle por rubro, los materiales incluidos y el plazo de obra en un solo documento.</p></div>
+      <div class="paso"><span class="paso__n">03</span><h3>Obra</h3><p>Un responsable coordina al equipo, protege lo que no se toca y te informa el avance cada semana.</p></div>
+      <div class="paso"><span class="paso__n">04</span><h3>Entrega</h3><p>Repasamos juntos cada detalle, corregimos lo que haga falta y te entregamos el espacio limpio.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS: estado vacío diseñado -->
+<section class="bloque bloque--osc">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow eyebrow--cl">Clientes</p>
+      <h2>Acá van las voces de tus clientes.</h2>
+      <p>Espacio reservado para comentarios reales. Pedile a tres clientes recientes un mensaje por WhatsApp y pegalos en estas fichas.</p>
+    </div>
+    <div class="testi rev">
+      <div class="testi__card"><p>Reemplazá este texto por el comentario textual del cliente.</p><span>NOMBRE · BARRIO · TIPO DE OBRA</span></div>
+      <div class="testi__card"><p>Reemplazá este texto por el comentario textual del cliente.</p><span>NOMBRE · BARRIO · TIPO DE OBRA</span></div>
+      <div class="testi__card"><p>Reemplazá este texto por el comentario textual del cliente.</p><span>NOMBRE · BARRIO · TIPO DE OBRA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="bloque" id="preguntas">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2>Lo que casi todos preguntan antes de empezar.</h2>
+    </div>
+    <div class="faq rev">
+      <details><summary>¿La visita y el presupuesto tienen costo?</summary><p>No. Vamos, medimos y te pasamos la propuesta sin cargo. Recién si te sirve avanzamos.</p></details>
+      <details><summary>¿Puedo seguir viviendo en la casa durante la obra?</summary><p>En la mayoría de las reformas sí. Trabajamos por sectores, protegemos muebles y pisos, y te avisamos de antemano qué días vas a tener el baño o la cocina fuera de servicio.</p></details>
+      <details><summary>¿Cuánto demora una reforma?</summary><p>Depende del alcance: un baño completo suele llevar entre dos y tres semanas y una reforma integral varios meses. El plazo exacto de tu obra queda escrito en el presupuesto.</p></details>
+      <details><summary>¿Los materiales los ponen ustedes?</summary><p>Como prefieras. Podemos incluirlos con marca y modelo a la vista, o trabajar con los que vos compres.</p></details>
+      <details><summary>¿Cómo se paga?</summary><p>Con un anticipo para arrancar y pagos por avance de obra, según el cronograma acordado. Todo queda por escrito antes de empezar.</p></details>
+      <details><summary>¿Trabajan en edificios con reglamento de copropiedad?</summary><p>Sí. Presentamos la documentación que pida la administración y respetamos los horarios de obra del edificio.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="bloque bloque--borde" id="contacto">
+  <div class="wrap">
+    <div class="bloque__cab rev">
+      <p class="eyebrow">Contacto</p>
+      <h2>Contanos qué querés cambiar.</h2>
+      <p>Completá los datos y se abre WhatsApp con el mensaje ya escrito. Si preferís, escribinos directo.</p>
+    </div>
+
+    <div class="cont">
+      <div class="form rev">
+        <div class="duo">
+          <div class="campo"><label for="fNom">Nombre</label><input id="fNom" type="text" autocomplete="name" placeholder="Tu nombre"><p class="error">Escribí tu nombre para saber con quién hablamos.</p></div>
+          <div class="campo"><label for="fTel">Teléfono</label><input id="fTel" type="tel" autocomplete="tel" placeholder="09X XXX XXX"><p class="error">Necesitamos un teléfono para responderte.</p></div>
+        </div>
+        <div class="duo">
+          <div class="campo"><label for="fZona">Zona</label><input id="fZona" type="text" placeholder="Barrio o localidad"></div>
+          <div class="campo"><label for="fTipo">Tipo de trabajo</label>
+            <select id="fTipo">
+              <option>Reforma integral</option><option>Cocina</option><option>Baño</option>
+              <option>Pintura y yeso</option><option>Iluminación y eléctrica</option>
+              <option>Carpintería y placares</option><option>Todavía no lo tengo claro</option>
+            </select>
+          </div>
+        </div>
+        <div class="campo"><label for="fMsj">Qué necesitás</label><textarea id="fMsj" placeholder="Contanos el estado actual, qué querés lograr y si tenés una fecha en mente."></textarea><p class="error">Contanos aunque sea en una línea qué necesitás.</p></div>
+        <button class="btn btn--osc" id="fEnviar" style="width:100%">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+          Enviar por WhatsApp
+        </button>
+        <p class="form__aviso">Respondemos el mismo día en horario laboral. Tus datos solo se usan para responderte.</p>
+      </div>
+
+      <div class="datos rev">
+        <div class="datos__it"><span>WhatsApp</span><a target="_blank" rel="noopener" href="https://wa.me/59897164582">097 164 582</a></div>
+        <div class="datos__it"><span>Teléfono</span><a href="tel:+59897164582">+598 97 164 582</a></div>
+        <div class="datos__it"><span>Horario</span><p>Lunes a sábado, 8:00 a 19:00</p></div>
+        <div class="datos__it"><span>Zona de trabajo</span><p>Montevideo y Canelones</p></div>
+        <div class="datos__it"><span>Visita y presupuesto</span><p>Sin costo y sin compromiso</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="wrap cierre__in">
+    <h2>Empecemos por el plano de tu espacio.</h2>
+    <p>Mandanos un mensaje con lo que querés cambiar. Si podés, sumá una foto: con eso ya te damos una primera idea de plazo y costo.</p>
+    <a class="btn btn--cobre" target="_blank" rel="noopener" href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">Escribinos al 097 164 582</a>
+  </div>
+</section>
+
 </main>
 
 <footer class="pie">
   <div class="wrap">
     <div class="pie__in">
       <div>
-        <a class="marca" href="#inicio" style="margin-bottom:14px">
-          <span class="marca__sello">ST</span>
-          <span class="marca__txt">ST Soluciones Integrales<span>Remodelamos tu mundo</span></span>
-        </a>
-        <p style="margin:14px 0 0;max-width:34ch">Reformas integrales para casas, apartamentos y locales en Montevideo y Canelones.</p>
+        <a class="marca" href="#inicio"><span class="marca__sello">ST</span><span class="marca__txt">ST Soluciones Integrales<span>Remodelamos tu mundo</span></span></a>
+        <p style="margin:16px 0 0;max-width:32ch">Reformas integrales para casas, apartamentos y locales en Montevideo y Canelones.</p>
       </div>
-      <div>
-        <h4>Contacto</h4>
-        <ul>
-          <li><a target="_blank" rel="noopener" href="https://wa.me/59897164582">WhatsApp 097 164 582</a></li>
-          <li><a href="tel:+59897164582">Llamar al 097 164 582</a></li>
-          <li>Lunes a sábado, 8:00 a 19:00</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="#servicios">Reforma integral</a></li>
-          <li><a href="#servicios">Cocinas y baños</a></li>
-          <li><a href="#servicios">Pintura y yeso</a></li>
-          <li><a href="#servicios">Iluminación y carpintería</a></li>
-        </ul>
-      </div>
+      <div><h4>Servicios</h4><ul>
+        <li><a href="#servicios">Reforma integral</a></li><li><a href="#servicios">Cocinas</a></li>
+        <li><a href="#servicios">Baños</a></li><li><a href="#servicios">Pintura y yeso</a></li>
+        <li><a href="#servicios">Iluminación</a></li><li><a href="#servicios">Carpintería</a></li>
+      </ul></div>
+      <div><h4>Navegación</h4><ul>
+        <li><a href="#comparador">El método</a></li><li><a href="#cotizador">Cotizador</a></li>
+        <li><a href="#obras">Obras</a></li><li><a href="#proceso">Cómo trabajamos</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+      </ul></div>
+      <div><h4>Contacto</h4><ul>
+        <li><a target="_blank" rel="noopener" href="https://wa.me/59897164582">WhatsApp 097 164 582</a></li>
+        <li><a href="tel:+59897164582">Llamar ahora</a></li>
+        <li>Lun a sáb · 8:00–19:00</li>
+        <li>Montevideo · Canelones</li>
+      </ul></div>
     </div>
     <div class="pie__legal">
       <span>© <span id="anio">2026</span> ST Soluciones Integrales</span>
@@ -577,26 +956,224 @@ a:focus-visible,summary:focus-visible,button:focus-visible{
   </div>
 </footer>
 
-<a class="barra" target="_blank" rel="noopener"
-   href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">
+<a class="barra" target="_blank" rel="noopener" href="https://wa.me/59897164582?text=Hola,%20quiero%20pedir%20un%20presupuesto%20para%20una%20reforma.">
   <span><b>Pedir presupuesto</b><small>RESPUESTA EL MISMO DÍA</small></span>
   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
 </a>
 
-<script>
-  document.getElementById('anio').textContent = new Date().getFullYear();
+<button class="subir" id="subir" aria-label="Volver arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const obs = new IntersectionObserver((entradas) => {
-      entradas.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: .12, rootMargin: '0px 0px -60px 0px' });
-    document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+<script>
+/* =====================================================================
+   CONFIGURACIÓN — REVISAR ANTES DE PUBLICAR
+   ===================================================================== */
+const TEL = '59897164582';
+
+/* Valores de referencia por m² en USD. SON PLACEHOLDERS: reemplazalos por
+   tus costos reales, o poné MOSTRAR_PRECIOS = false para ocultar el rango. */
+const MOSTRAR_PRECIOS = true;
+const PRECIO_M2  = { cocina:380, bano:450, living:220, dorm:200, local:260, casa:300 };
+const SEMANAS_M2 = { cocina:.25, bano:.35, living:.14, dorm:.14, local:.16, casa:.10 };
+const NIVEL = { estandar:{f:1,txt:'Estándar'}, superior:{f:1.35,txt:'Superior'}, premium:{f:1.8,txt:'Premium'} };
+const NOMBRE_AMB = { cocina:'Cocina', bano:'Baño', living:'Living / comedor', dorm:'Dormitorio', local:'Local comercial', casa:'Vivienda completa' };
+
+/* Obras: reemplazar por obras reales. Para usar fotos, cambiar ilustracion()
+   por <img src="fotos/mi-obra.jpg" alt="..."> */
+const OBRAS = [
+  {t:'Cocina en Pocitos', c:'cocina', d:'14 m² · 4 semanas · Mesada de cuarzo'},
+  {t:'Baño principal en Punta Carretas', c:'bano', d:'6 m² · 3 semanas · Porcelanato 60×60'},
+  {t:'Reforma integral en Malvín', c:'integral', d:'92 m² · 14 semanas · Instalaciones nuevas'},
+  {t:'Local gastronómico en Ciudad Vieja', c:'local', d:'70 m² · 9 semanas · Habilitación incluida'},
+  {t:'Cocina abierta en Carrasco', c:'cocina', d:'18 m² · 5 semanas · Isla a medida'},
+  {t:'Baño de servicio en Parque Rodó', c:'bano', d:'4 m² · 2 semanas · Impermeabilización total'}
+];
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+addEventListener('load', () => setTimeout(()=>$('#carga').classList.add('listo'), reduce?0:650));
+$('#anio').textContent = new Date().getFullYear();
+
+/* header */
+const cab = $('#top'), progreso = $('#progreso'), secciones = $$('main section[id]');
+function alScroll(){
+  const y = scrollY;
+  cab.classList.toggle('fijo', y > 40);
+  const h = document.documentElement.scrollHeight - innerHeight;
+  progreso.style.width = (h>0 ? (y/h)*100 : 0) + '%';
+  $('#subir').classList.toggle('ver', y > 700);
+  let act = '';
+  secciones.forEach(s => { if (s.offsetTop - 150 <= y) act = s.id; });
+  $$('#nav a').forEach(a => a.classList.toggle('activo', a.getAttribute('href') === '#'+act));
+}
+addEventListener('scroll', alScroll, {passive:true}); alScroll();
+$('#subir').addEventListener('click', ()=>scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
+
+/* menú móvil */
+const mb = $('#menuBtn'), cajon = $('#cajon');
+mb.addEventListener('click', () => {
+  const ab = mb.getAttribute('aria-expanded') === 'true';
+  mb.setAttribute('aria-expanded', String(!ab));
+  cajon.classList.toggle('abierto', !ab);
+  document.body.style.overflow = !ab ? 'hidden' : '';
+});
+$$('#cajon a').forEach(a => a.addEventListener('click', () => {
+  mb.setAttribute('aria-expanded','false'); cajon.classList.remove('abierto'); document.body.style.overflow='';
+}));
+
+/* comparador */
+const capaObra = $('#compObra'), tirador = $('#compTirador');
+function moverComp(v){
+  capaObra.style.clipPath = 'inset(0 ' + (100-v) + '% 0 0)';
+  tirador.style.left = v + '%';
+}
+$('#compRango').addEventListener('input', e => moverComp(+e.target.value));
+moverComp(50);
+
+/* pestañas */
+const tabs = $$('.serv__tab');
+function abrirTab(i){
+  tabs.forEach((t,j)=>{
+    const sel = i===j;
+    t.setAttribute('aria-selected', String(sel));
+    t.tabIndex = sel ? 0 : -1;
+    const p = document.getElementById(t.getAttribute('aria-controls'));
+    p.classList.toggle('activo', sel);
+    p.hidden = !sel;
+  });
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener('click', ()=>abrirTab(i));
+  t.addEventListener('keydown', e=>{
+    if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();const n=(i+1)%tabs.length;abrirTab(n);tabs[n].focus();}
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();const n=(i-1+tabs.length)%tabs.length;abrirTab(n);tabs[n].focus();}
+  });
+});
+
+/* cotizador */
+const m2 = $('#m2');
+const fmt = n => new Intl.NumberFormat('es-UY').format(Math.round(n/100)*100);
+function calcular(){
+  const amb = document.querySelector('input[name="amb"]:checked').value;
+  const niv = document.querySelector('input[name="niv"]:checked').value;
+  const sup = +m2.value;
+  const base = PRECIO_M2[amb] * sup * NIVEL[niv].f;
+  const factorNiv = niv==='premium' ? 1.25 : niv==='superior' ? 1.1 : 1;
+  const semanas = Math.max(1, Math.round(SEMANAS_M2[amb] * sup * factorNiv));
+
+  $('#m2Val').textContent = sup + ' m²';
+  $('#rAmb').textContent  = NOMBRE_AMB[amb];
+  $('#rM2').textContent   = sup + ' m²';
+  $('#rNiv').textContent  = NIVEL[niv].txt;
+  $('#rPlazo').textContent = semanas + (semanas===1 ? ' semana' : ' semanas');
+
+  let linea = '';
+  if(MOSTRAR_PRECIOS){
+    const r = 'USD ' + fmt(base*0.88) + ' – ' + fmt(base*1.12);
+    $('#rTotal').textContent = r;
+    linea = '\nRango estimado en la web: ' + r;
   } else {
-    document.querySelectorAll('.rev').forEach(el => el.classList.add('visible'));
+    $('#bloqueTotal').style.display = 'none';
   }
+
+  const msj = 'Hola, quiero un presupuesto.\n\nAmbiente: ' + NOMBRE_AMB[amb] +
+              '\nSuperficie: ' + sup + ' m²\nTerminación: ' + NIVEL[niv].txt +
+              '\nPlazo estimado: ' + semanas + ' semanas' + linea;
+  $('#rWhats').href = 'https://wa.me/' + TEL + '?text=' + encodeURIComponent(msj);
+}
+$$('#ambientes input, #niveles input').forEach(i=>i.addEventListener('change', calcular));
+m2.addEventListener('input', calcular);
+calcular();
+
+/* obras */
+function ilustracion(cat){
+  const paleta = {cocina:'#C58361', bano:'#7FA3B0', integral:'#B08256', local:'#8A9199'};
+  const c = paleta[cat] || '#C58361';
+  return '<svg viewBox="0 0 400 300" role="img" aria-label="Ilustración de obra">' +
+    '<rect width="400" height="300" fill="#22262B"/>' +
+    '<g fill="none" stroke="rgba(255,255,255,.09)"><path d="M0 60H400M0 120H400M0 180H400M0 240H400M80 0V300M160 0V300M240 0V300M320 0V300"/></g>' +
+    '<path d="M110 220 L50 270 H350 L290 220 Z" fill="' + c + '" opacity=".22"/>' +
+    '<path d="M170 120h60v50h-60Z" fill="' + c + '" opacity=".35"/>' +
+    '<g fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.6">' +
+    '<path d="M110 90H290V220H110Z"/><path d="M50 40L110 90M350 40L290 90M50 270L110 220M350 270L290 220"/>' +
+    '<path d="M170 120h60v50h-60Z"/></g>' +
+    '<circle cx="200" cy="75" r="4" fill="' + c + '"/></svg>';
+}
+$('#listaObras').innerHTML = OBRAS.map((o,i)=>
+  '<button class="obra" data-c="' + o.c + '" data-i="' + i + '">' +
+  '<span class="obra__img">' + ilustracion(o.c) + '<span class="obra__tag">' + o.c.toUpperCase() + '</span></span>' +
+  '<span class="obra__txt"><h3>' + o.t + '</h3><p>' + o.d + '</p></span></button>').join('');
+
+$$('.filtro').forEach(f=>f.addEventListener('click',()=>{
+  $$('.filtro').forEach(x=>x.setAttribute('aria-pressed','false'));
+  f.setAttribute('aria-pressed','true');
+  const val = f.dataset.f;
+  $$('.obra').forEach(o=>o.classList.toggle('oculta', val!=='todas' && o.dataset.c!==val));
+}));
+
+/* lightbox */
+const lb = $('#lb');
+let ultimoFoco = null;
+function abrirLb(i){
+  const o = OBRAS[i];
+  ultimoFoco = document.activeElement;
+  $('#lbImg').innerHTML = ilustracion(o.c);
+  $('#lbTit').textContent = o.t;
+  $('#lbSub').textContent = o.d;
+  lb.classList.add('abierto'); document.body.style.overflow='hidden';
+  $('#lbCerrar').focus();
+}
+function cerrarLb(){
+  lb.classList.remove('abierto'); document.body.style.overflow='';
+  if(ultimoFoco) ultimoFoco.focus();
+}
+$$('.obra').forEach(o=>o.addEventListener('click',()=>abrirLb(+o.dataset.i)));
+$('#lbCerrar').addEventListener('click', cerrarLb);
+lb.addEventListener('click', e=>{ if(e.target===lb) cerrarLb(); });
+addEventListener('keydown', e=>{ if(e.key==='Escape' && lb.classList.contains('abierto')) cerrarLb(); });
+
+/* formulario → WhatsApp */
+$('#fEnviar').addEventListener('click', ()=>{
+  const nom=$('#fNom'), tel=$('#fTel'), msj=$('#fMsj');
+  let ok = true;
+  [[nom, v=>v.trim().length>1],
+   [tel, v=>v.replace(/\D/g,'').length>=8],
+   [msj, v=>v.trim().length>3]].forEach(par=>{
+    const el = par[0], test = par[1];
+    const campo = el.closest('.campo');
+    const bien = test(el.value);
+    campo.classList.toggle('mal', !bien);
+    if(!bien && ok){ el.focus(); ok = false; }
+  });
+  if(!ok) return;
+  const texto = 'Hola, quiero coordinar una visita.\n\nNombre: ' + nom.value +
+                '\nTeléfono: ' + tel.value +
+                '\nZona: ' + ($('#fZona').value || '—') +
+                '\nTipo de trabajo: ' + $('#fTipo').value + '\n\n' + msj.value;
+  open('https://wa.me/' + TEL + '?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+});
+$$('.form input, .form textarea').forEach(el=>el.addEventListener('input',()=>el.closest('.campo').classList.remove('mal')));
+
+/* revelado + barra de proceso */
+if(!reduce){
+  const obs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  },{threshold:.1, rootMargin:'0px 0px -60px 0px'});
+  $$('.rev').forEach(el=>obs.observe(el));
+
+  const obsProc = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>$('#procProg').style.width='100%',300); obsProc.unobserve(e.target); } });
+  },{threshold:.25});
+  obsProc.observe($('#proc'));
+} else {
+  $$('.rev').forEach(el=>el.classList.add('visible'));
+  $('#procProg').style.width='100%';
+}
 </script>
 
-<!-- Datos estructurados: ayudan a que Google muestre teléfono y zona en los resultados -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -606,7 +1183,8 @@ a:focus-visible,summary:focus-visible,button:focus-visible{
   "telephone":"+59897164582",
   "areaServed":["Montevideo","Canelones"],
   "address":{"@type":"PostalAddress","addressCountry":"UY","addressLocality":"Montevideo"},
-  "openingHours":"Mo-Sa 08:00-19:00"
+  "openingHours":"Mo-Sa 08:00-19:00",
+  "priceRange":"$$"
 }
 </script>
 </body>
