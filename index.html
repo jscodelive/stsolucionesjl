@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ST Soluciones Integrales | Reformas y remodelaciones en Montevideo</title>
 <meta name="description" content="Reformas integrales, cocinas, baños, pintura, iluminación y carpintería en Montevideo y Canelones. Presupuesto cerrado, fecha de entrega por escrito y un solo responsable de obra.">
+<link rel="icon" href="fotos/logo-chico.png" type="image/png">
+<link rel="apple-touch-icon" href="fotos/logo.png">
+<meta property="og:image" content="fotos/comedor-luz.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#22262B">
 <meta property="og:title" content="ST Soluciones Integrales | Remodelamos tu mundo">
 <meta property="og:description" content="Reformas integrales en Montevideo. Presupuesto cerrado y fecha de entrega por escrito.">
@@ -78,10 +82,10 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
   transition:height .3s var(--ease);position:relative}
 .top.fijo .top__in{height:66px}
 .marca{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cal)}
-.marca__sello{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1px solid var(--cobre);
-  color:var(--cobre);font-family:var(--display);font-weight:800;font-size:.92rem;
-  transition:background .25s var(--ease),color .25s var(--ease)}
-.marca:hover .marca__sello{background:var(--cobre);color:#1B1310}
+.marca__sello{width:38px;height:38px;flex:none;display:block;border-radius:50%;
+  overflow:hidden;transition:transform .25s var(--ease)}
+.marca__sello img{width:100%;height:100%;object-fit:cover;display:block}
+.marca:hover .marca__sello{transform:scale(1.06)}
 .marca__txt{font-family:var(--display);font-weight:700;font-size:.98rem;line-height:1.1}
 .marca__txt span{display:block;font-family:var(--mono);font-weight:400;font-size:.58rem;
   letter-spacing:.2em;text-transform:uppercase;color:var(--grafito-cl);margin-top:4px}
@@ -268,6 +272,14 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
 .obra.oculta{display:none}
 .obra__img{position:relative;display:block;line-height:0}
 .obra__img svg{width:100%;height:auto;display:block}
+/* Las fotos vienen en formatos distintos (verticales y horizontales): se
+   recortan a un mismo alto para que la grilla quede pareja. */
+.obra__img img{width:100%;height:clamp(220px,26vw,300px);object-fit:cover;
+  object-position:center;display:block;background:var(--hormigon)}
+.obra:hover .obra__img img{transform:scale(1.03)}
+.obra__img img{transition:transform .5s var(--ease)}
+/* En el lightbox se ve la foto entera, sin recortar. */
+#lbImg img{width:100%;height:auto;max-height:78vh;object-fit:contain;display:block}
 .obra__tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:.58rem;
   letter-spacing:.16em;padding:5px 9px;background:rgba(0,0,0,.5);color:var(--cobre);
   border:1px solid var(--linea-cl);line-height:1.4}
@@ -405,7 +417,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
 <header class="top" id="top">
   <div class="wrap top__in">
     <a class="marca" href="#inicio">
-      <span class="marca__sello">ST</span>
+      <span class="marca__sello"><img src="fotos/logo-chico.png" alt="Logo de ST Soluciones Integrales" width="38" height="38"></span>
       <span class="marca__txt">ST Soluciones Integrales<span>Remodelamos tu mundo</span></span>
     </a>
     <nav class="nav" id="nav">
@@ -929,7 +941,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.06;letter-s
   <div class="wrap">
     <div class="pie__in">
       <div>
-        <a class="marca" href="#inicio"><span class="marca__sello">ST</span><span class="marca__txt">ST Soluciones Integrales<span>Remodelamos tu mundo</span></span></a>
+        <a class="marca" href="#inicio"><span class="marca__sello"><img src="fotos/logo-chico.png" alt="Logo de ST Soluciones Integrales" width="38" height="38"></span><span class="marca__txt">ST Soluciones Integrales<span>Remodelamos tu mundo</span></span></a>
         <p style="margin:16px 0 0;max-width:32ch">Reformas integrales para casas, apartamentos y locales en Montevideo y Canelones.</p>
       </div>
       <div><h4>Servicios</h4><ul>
@@ -979,15 +991,29 @@ const SEMANAS_M2 = { cocina:.25, bano:.35, living:.14, dorm:.14, local:.16, casa
 const NIVEL = { estandar:{f:1,txt:'Estándar'}, superior:{f:1.35,txt:'Superior'}, premium:{f:1.8,txt:'Premium'} };
 const NOMBRE_AMB = { cocina:'Cocina', bano:'Baño', living:'Living / comedor', dorm:'Dormitorio', local:'Local comercial', casa:'Vivienda completa' };
 
-/* Obras: reemplazar por obras reales. Para usar fotos, cambiar ilustracion()
-   por <img src="fotos/mi-obra.jpg" alt="..."> */
+/* Obras realizadas. Cada una lleva su foto en fotos/.
+   Para agregar una obra nueva: subí la foto a fotos/ y sumá un objeto acá
+   con {t: título, c: categoría, d: detalle, img: 'fotos/archivo.jpg'}.
+   Categorías válidas (son las de los filtros): cocina, bano, integral, local. */
 const OBRAS = [
-  {t:'Cocina en Pocitos', c:'cocina', d:'14 m² · 4 semanas · Mesada de cuarzo'},
-  {t:'Baño principal en Punta Carretas', c:'bano', d:'6 m² · 3 semanas · Porcelanato 60×60'},
-  {t:'Reforma integral en Malvín', c:'integral', d:'92 m² · 14 semanas · Instalaciones nuevas'},
-  {t:'Local gastronómico en Ciudad Vieja', c:'local', d:'70 m² · 9 semanas · Habilitación incluida'},
-  {t:'Cocina abierta en Carrasco', c:'cocina', d:'18 m² · 5 semanas · Isla a medida'},
-  {t:'Baño de servicio en Parque Rodó', c:'bano', d:'4 m² · 2 semanas · Impermeabilización total'}
+  {t:'Comedor con iluminación integrada', c:'integral',
+   d:'Cielorraso, luz indirecta, revestimiento de piedra y jardín vertical',
+   img:'fotos/comedor-luz.jpg'},
+  {t:'Revestimiento de mármol con luz perimetral', c:'integral',
+   d:'Placas gran formato, listones de madera y luz cálida oculta',
+   img:'fotos/marmol-madera.jpg'},
+  {t:'Pared de mármol con jardín vertical', c:'integral',
+   d:'Combinación de placa símil mármol y verde artificial a medida',
+   img:'fotos/marmol-jardin.jpg'},
+  {t:'Panel 3D con marco de jardín vertical', c:'local',
+   d:'Panelería tridimensional iluminada, pensada para recepción',
+   img:'fotos/panel3d-jardin.jpg'},
+  {t:'Panel 3D sobre muro de microcemento', c:'local',
+   d:'Textura en relieve con luz rasante y terminación continua',
+   img:'fotos/panel3d-cemento.jpg'},
+  {t:'Mármol con terminación lateral en madera', c:'integral',
+   d:'Detalle de encuentro entre placa, listones y cielorraso',
+   img:'fotos/marmol-lateral.jpg'}
 ];
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1102,9 +1128,18 @@ function ilustracion(cat){
     '<path d="M170 120h60v50h-60Z"/></g>' +
     '<circle cx="200" cy="75" r="4" fill="' + c + '"/></svg>';
 }
+/* Si la obra trae foto se usa la foto; si no, cae en la ilustración SVG.
+   Así se pueden ir sumando obras sin foto sin que se rompa la galería. */
+function visual(o, carga){
+  return o.img
+    ? '<img src="' + o.img + '" alt="' + o.t + '" loading="' + (carga || 'lazy') + '" decoding="async">'
+    : ilustracion(o.c);
+}
+
 $('#listaObras').innerHTML = OBRAS.map((o,i)=>
   '<button class="obra" data-c="' + o.c + '" data-i="' + i + '">' +
-  '<span class="obra__img">' + ilustracion(o.c) + '<span class="obra__tag">' + o.c.toUpperCase() + '</span></span>' +
+  '<span class="obra__img">' + visual(o, i < 2 ? 'eager' : 'lazy') +
+  '<span class="obra__tag">' + o.c.toUpperCase() + '</span></span>' +
   '<span class="obra__txt"><h3>' + o.t + '</h3><p>' + o.d + '</p></span></button>').join('');
 
 $$('.filtro').forEach(f=>f.addEventListener('click',()=>{
@@ -1120,7 +1155,7 @@ let ultimoFoco = null;
 function abrirLb(i){
   const o = OBRAS[i];
   ultimoFoco = document.activeElement;
-  $('#lbImg').innerHTML = ilustracion(o.c);
+  $('#lbImg').innerHTML = visual(o, 'eager');
   $('#lbTit').textContent = o.t;
   $('#lbSub').textContent = o.d;
   lb.classList.add('abierto'); document.body.style.overflow='hidden';
